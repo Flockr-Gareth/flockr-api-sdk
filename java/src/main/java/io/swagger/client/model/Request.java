@@ -29,7 +29,7 @@ import java.io.IOException;
  * Request
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2024-08-09T13:49:56.363387768Z[GMT]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2024-08-09T14:32:01.000659766Z[GMT]")
 
 public class Request {
   @SerializedName("visitor")
@@ -53,7 +53,7 @@ public class Request {
    * Get visitor
    * @return visitor
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public RequestVisitor getVisitor() {
     return visitor;
   }
@@ -71,7 +71,7 @@ public class Request {
    * Get location
    * @return location
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public RequestLocation getLocation() {
     return location;
   }

@@ -25,7 +25,7 @@ import java.io.IOException;
  * RequestVisitor
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2024-08-09T13:49:56.363387768Z[GMT]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2024-08-09T14:32:01.000659766Z[GMT]")
 
 public class RequestVisitor {
   @SerializedName("id")
@@ -43,7 +43,7 @@ public class RequestVisitor {
    * A unique id for the visitor
    * @return id
   **/
-  @Schema(example = "51102fbc-525c-41a2-b4e1-1606e19f3f88", description = "A unique id for the visitor")
+  @Schema(example = "51102fbc-525c-41a2-b4e1-1606e19f3f88", required = true, description = "A unique id for the visitor")
   public String getId() {
     return id;
   }
@@ -61,7 +61,7 @@ public class RequestVisitor {
    * A unique id for the session
    * @return sessionId
   **/
-  @Schema(example = "5e537d75-72ff-47df-a581-d5f0d0316062", description = "A unique id for the session")
+  @Schema(example = "5e537d75-72ff-47df-a581-d5f0d0316062", required = true, description = "A unique id for the session")
   public String getSessionId() {
     return sessionId;
   }

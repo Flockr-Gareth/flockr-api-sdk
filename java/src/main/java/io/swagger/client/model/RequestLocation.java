@@ -25,7 +25,7 @@ import java.io.IOException;
  * RequestLocation
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2024-08-09T13:49:56.363387768Z[GMT]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2024-08-09T14:32:01.000659766Z[GMT]")
 
 public class RequestLocation {
   @SerializedName("host")
@@ -40,7 +40,7 @@ public class RequestLocation {
    * The host name or ip address
    * @return host
   **/
-  @Schema(example = "www.toppstiles.co.uk", description = "The host name or ip address")
+  @Schema(example = "www.toppstiles.co.uk", required = true, description = "The host name or ip address")
   public String getHost() {
     return host;
   }

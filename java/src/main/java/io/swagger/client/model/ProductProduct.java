@@ -27,7 +27,7 @@ import java.util.List;
  * ProductProduct
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2024-08-09T13:49:56.363387768Z[GMT]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2024-08-09T14:32:01.000659766Z[GMT]")
 
 public class ProductProduct {
   @SerializedName("altId")
@@ -49,7 +49,7 @@ public class ProductProduct {
   private String name = null;
 
   @SerializedName("recommendations")
-  private List<String> recommendations = null;
+  private List<OneOfproductProductRecommendationsItems> recommendations = null;
 
   @SerializedName("sku")
   private String sku = null;
@@ -84,7 +84,7 @@ public class ProductProduct {
    * The unique ID for the product - must be a string
    * @return id
   **/
-  @Schema(example = "1725", description = "The unique ID for the product - must be a string")
+  @Schema(example = "1725", required = true, description = "The unique ID for the product - must be a string")
   public String getId() {
     return id;
   }
@@ -165,14 +165,14 @@ public class ProductProduct {
     this.name = name;
   }
 
-  public ProductProduct recommendations(List<String> recommendations) {
+  public ProductProduct recommendations(List<OneOfproductProductRecommendationsItems> recommendations) {
     this.recommendations = recommendations;
     return this;
   }
 
-  public ProductProduct addRecommendationsItem(String recommendationsItem) {
+  public ProductProduct addRecommendationsItem(OneOfproductProductRecommendationsItems recommendationsItem) {
     if (this.recommendations == null) {
-      this.recommendations = new ArrayList<String>();
+      this.recommendations = new ArrayList<OneOfproductProductRecommendationsItems>();
     }
     this.recommendations.add(recommendationsItem);
     return this;
@@ -183,11 +183,11 @@ public class ProductProduct {
    * @return recommendations
   **/
   @Schema(example = "[7654,3456]", description = "Optional list of product IDs to fetch proof values for (can be requested on a dedicated call instead if required)")
-  public List<String> getRecommendations() {
+  public List<OneOfproductProductRecommendationsItems> getRecommendations() {
     return recommendations;
   }
 
-  public void setRecommendations(List<String> recommendations) {
+  public void setRecommendations(List<OneOfproductProductRecommendationsItems> recommendations) {
     this.recommendations = recommendations;
   }
 

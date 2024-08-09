@@ -1,6 +1,5 @@
-# Product
+# OneOfproductProductRecommendationsItems
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**product** | [**ProductProduct**](ProductProduct.md) |  | 

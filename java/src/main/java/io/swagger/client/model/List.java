@@ -32,14 +32,14 @@ import java.util.List;
  * List
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2024-08-09T13:49:56.363387768Z[GMT]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2024-08-09T14:32:01.000659766Z[GMT]")
 
 public class List extends Request {
   @SerializedName("category")
   private String category = null;
 
   @SerializedName("products")
-  private List<String> products = null;
+  private List<String> products = new ArrayList<String>();
 
   @SerializedName("recommendations")
   private List<String> recommendations = null;
@@ -50,10 +50,10 @@ public class List extends Request {
   }
 
    /**
-   * The category of the products
+   * The category of the products - should not be an empty string
    * @return category
   **/
-  @Schema(example = "Bathroom Tiles", description = "The category of the products")
+  @Schema(example = "Bathroom Tiles", required = true, description = "The category of the products - should not be an empty string")
   public String getCategory() {
     return category;
   }
@@ -68,9 +68,6 @@ public class List extends Request {
   }
 
   public List addProductsItem(String productsItem) {
-    if (this.products == null) {
-      this.products = new ArrayList<String>();
-    }
     this.products.add(productsItem);
     return this;
   }
@@ -79,7 +76,7 @@ public class List extends Request {
    * An array of product IDs, also accepts an array of altIds, e.g. [{altId:\&quot;abcdefg\&quot;}]
    * @return products
   **/
-  @Schema(example = "[\"1725\",\"8647\",\"1750\",\"9325\"]", description = "An array of product IDs, also accepts an array of altIds, e.g. [{altId:\"abcdefg\"}]")
+  @Schema(example = "[\"1725\",\"8647\",\"1750\",\"9325\"]", required = true, description = "An array of product IDs, also accepts an array of altIds, e.g. [{altId:\"abcdefg\"}]")
   public List<String> getProducts() {
     return products;
   }

@@ -32,14 +32,14 @@ import java.util.List;
  * ListOnly
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2024-08-09T13:49:56.363387768Z[GMT]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2024-08-09T14:32:01.000659766Z[GMT]")
 
 public class ListOnly extends Request {
   @SerializedName("category")
   private String category = null;
 
   @SerializedName("products")
-  private List<String> products = null;
+  private List<String> products = new ArrayList<String>();
 
   public ListOnly category(String category) {
     this.category = category;
@@ -50,7 +50,7 @@ public class ListOnly extends Request {
    * Should be set to \&quot;recommendations\&quot;
    * @return category
   **/
-  @Schema(example = "recommendations", description = "Should be set to \"recommendations\"")
+  @Schema(example = "recommendations", required = true, description = "Should be set to \"recommendations\"")
   public String getCategory() {
     return category;
   }
@@ -65,9 +65,6 @@ public class ListOnly extends Request {
   }
 
   public ListOnly addProductsItem(String productsItem) {
-    if (this.products == null) {
-      this.products = new ArrayList<String>();
-    }
     this.products.add(productsItem);
     return this;
   }
@@ -76,7 +73,7 @@ public class ListOnly extends Request {
    * An array of product IDs, also accepts an array of altIds, e.g. [{altId:\&quot;abcdefg\&quot;}]
    * @return products
   **/
-  @Schema(example = "[\"1725\",\"8647\",\"1750\",\"9325\"]", description = "An array of product IDs, also accepts an array of altIds, e.g. [{altId:\"abcdefg\"}]")
+  @Schema(example = "[\"1725\",\"8647\",\"1750\",\"9325\"]", required = true, description = "An array of product IDs, also accepts an array of altIds, e.g. [{altId:\"abcdefg\"}]")
   public List<String> getProducts() {
     return products;
   }

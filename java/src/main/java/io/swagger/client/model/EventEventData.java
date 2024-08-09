@@ -26,7 +26,7 @@ import java.math.BigDecimal;
  * EventEventData
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2024-08-09T13:49:56.363387768Z[GMT]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2024-08-09T14:32:01.000659766Z[GMT]")
 
 public class EventEventData {
   @SerializedName("label")
@@ -44,10 +44,10 @@ public class EventEventData {
   }
 
    /**
-   * The id of the product
+   * The id of the product (you can specify label, label &amp; altId or altId)
    * @return label
   **/
-  @Schema(example = "1725", description = "The id of the product")
+  @Schema(example = "1725", description = "The id of the product (you can specify label, label & altId or altId)")
   public String getLabel() {
     return label;
   }
@@ -62,10 +62,10 @@ public class EventEventData {
   }
 
    /**
-   * An alternative ID for the product
+   * An alternative ID for the product (you can specify label, label &amp; altId or altId)
    * @return altId
   **/
-  @Schema(example = "abcdefg", description = "An alternative ID for the product")
+  @Schema(example = "abcdefg", description = "An alternative ID for the product (you can specify label, label & altId or altId)")
   public String getAltId() {
     return altId;
   }
@@ -83,7 +83,7 @@ public class EventEventData {
    * The value for the event, e.g. the number of items added
    * @return value
   **/
-  @Schema(example = "1", description = "The value for the event, e.g. the number of items added")
+  @Schema(example = "1", required = true, description = "The value for the event, e.g. the number of items added")
   public BigDecimal getValue() {
     return value;
   }
