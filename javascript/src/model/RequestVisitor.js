@@ -25,8 +25,12 @@ export default class RequestVisitor {
    * Constructs a new <code>RequestVisitor</code>.
    * @alias module:model/RequestVisitor
    * @class
+   * @param id {String} A unique id for the visitor
+   * @param sessionId {String} A unique id for the session
    */
-  constructor() {
+  constructor(id, sessionId) {
+    this.id = id;
+    this.sessionId = sessionId;
   }
 
   /**

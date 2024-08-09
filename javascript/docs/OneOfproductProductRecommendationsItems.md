@@ -1,6 +1,5 @@
-# FlockrSocialProofApi.Product
+# FlockrSocialProofApi.OneOfproductProductRecommendationsItems
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**product** | [**ProductProduct**](ProductProduct.md) |  | 

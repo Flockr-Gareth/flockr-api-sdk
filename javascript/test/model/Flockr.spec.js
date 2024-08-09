@@ -52,6 +52,12 @@
         // expect(instance.socialProof).to.be(expectedValueLiteral);
       });
 
+      it('should have the property recommendations (base name: "recommendations")', function() {
+        // TODO: update the code to test the property recommendations
+        expect(instance).to.have.property('recommendations');
+        // expect(instance.recommendations).to.be(expectedValueLiteral);
+      });
+
     });
   });
 

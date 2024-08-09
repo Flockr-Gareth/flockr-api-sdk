@@ -25,8 +25,10 @@ export default class OrderOrderItems {
    * Constructs a new <code>OrderOrderItems</code>.
    * @alias module:model/OrderOrderItems
    * @class
+   * @param quantity {String} The quantity purchased
    */
-  constructor() {
+  constructor(quantity) {
+    this.quantity = quantity;
   }
 
   /**

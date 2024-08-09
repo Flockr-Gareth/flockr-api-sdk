@@ -31,9 +31,15 @@ export default class ListOnly extends Request {
    * @alias module:model/ListOnly
    * @class
    * @extends module:model/Request
+   * @param category {} Should be set to \"recommendations\"
+   * @param products {} An array of product IDs, also accepts an array of altIds, e.g. [{altId:\"abcdefg\"}]
+   * @param visitor {} 
+   * @param location {} 
    */
-  constructor() {
-    super();
+  constructor(category, products, visitor, location) {
+    super(visitor, location);
+    this.category = category;
+    this.products = products;
   }
 
   /**

@@ -25,8 +25,10 @@ export default class EventEventData {
    * Constructs a new <code>EventEventData</code>.
    * @alias module:model/EventEventData
    * @class
+   * @param value {Number} The value for the event, e.g. the number of items added
    */
-  constructor() {
+  constructor(value) {
+    this.value = value;
   }
 
   /**
@@ -51,13 +53,13 @@ export default class EventEventData {
 }
 
 /**
- * The id of the product
+ * The id of the product (you can specify label, label & altId or altId)
  * @member {String} label
  */
 EventEventData.prototype.label = undefined;
 
 /**
- * An alternative ID for the product
+ * An alternative ID for the product (you can specify label, label & altId or altId)
  * @member {String} altId
  */
 EventEventData.prototype.altId = undefined;
