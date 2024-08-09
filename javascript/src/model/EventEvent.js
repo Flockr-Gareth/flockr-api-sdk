@@ -26,8 +26,14 @@ export default class EventEvent {
    * Constructs a new <code>EventEvent</code>.
    * @alias module:model/EventEvent
    * @class
+   * @param category {String} The category of the event
+   * @param name {String} The name of the event
+   * @param data {module:model/EventEventData} 
    */
-  constructor() {
+  constructor(category, name, data) {
+    this.category = category;
+    this.name = name;
+    this.data = data;
   }
 
   /**

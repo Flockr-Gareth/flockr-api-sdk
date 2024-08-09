@@ -45,6 +45,8 @@ export default class Flockr {
         obj.result = FlockrResult.constructFromObject(data['result']);
       if (data.hasOwnProperty('socialProof'))
         obj.socialProof = ApiClient.convertToType(data['socialProof'], [SocialProof]);
+      if (data.hasOwnProperty('recommendations'))
+        obj.recommendations = ApiClient.convertToType(data['recommendations'], [SocialProof]);
     }
     return obj;
   }
@@ -59,4 +61,9 @@ Flockr.prototype.result = undefined;
  * @member {Array.<module:model/SocialProof>} socialProof
  */
 Flockr.prototype.socialProof = undefined;
+
+/**
+ * @member {Array.<module:model/SocialProof>} recommendations
+ */
+Flockr.prototype.recommendations = undefined;
 

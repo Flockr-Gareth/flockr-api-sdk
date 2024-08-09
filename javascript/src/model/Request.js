@@ -29,8 +29,12 @@ export default class Request {
    * Constructs a new <code>Request</code>.
    * @alias module:model/Request
    * @class
+   * @param visitor {module:model/RequestVisitor} 
+   * @param location {module:model/RequestLocation} 
    */
-  constructor() {
+  constructor(visitor, location) {
+    this.visitor = visitor;
+    this.location = location;
   }
 
   /**

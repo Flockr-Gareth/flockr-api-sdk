@@ -31,9 +31,15 @@ export default class List extends Request {
    * @alias module:model/List
    * @class
    * @extends module:model/Request
+   * @param category {} The category of the products - should not be an empty string
+   * @param products {} An array of product IDs, also accepts an array of altIds, e.g. [{altId:\"abcdefg\"}]
+   * @param visitor {} 
+   * @param location {} 
    */
-  constructor() {
-    super();
+  constructor(category, products, visitor, location) {
+    super(visitor, location);
+    this.category = category;
+    this.products = products;
   }
 
   /**
@@ -59,7 +65,7 @@ export default class List extends Request {
 }
 
 /**
- * The category of the products
+ * The category of the products - should not be an empty string
  * @member {String} category
  */
 List.prototype.category = undefined;

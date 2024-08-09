@@ -3,4 +3,4 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**product** | [**ProductProduct**](ProductProduct.md) |  |  [optional]
+**product** | [**ProductProduct**](ProductProduct.md) |  | 

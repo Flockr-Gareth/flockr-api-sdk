@@ -89,7 +89,7 @@ api.cartDrawer(body, apiKey, opts, callback);
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *https://api.cdn.flockr.co/api/v2/key*
+All URIs are relative to *https://virtserver.swaggerhub.com/Flockr_AI/Flockr/1.0.0*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
@@ -106,6 +106,7 @@ Class | Method | HTTP request | Description
 
 ## Documentation for Models
 
+ - [FlockrSocialProofApi.AltId](docs/AltId.md)
  - [FlockrSocialProofApi.Event](docs/Event.md)
  - [FlockrSocialProofApi.EventEvent](docs/EventEvent.md)
  - [FlockrSocialProofApi.EventEventData](docs/EventEventData.md)
@@ -117,6 +118,7 @@ Class | Method | HTTP request | Description
  - [FlockrSocialProofApi.MessageRaw](docs/MessageRaw.md)
  - [FlockrSocialProofApi.MessageRawLong](docs/MessageRawLong.md)
  - [FlockrSocialProofApi.MessageRawShort](docs/MessageRawShort.md)
+ - [FlockrSocialProofApi.OneOfproductProductRecommendationsItems](docs/OneOfproductProductRecommendationsItems.md)
  - [FlockrSocialProofApi.Order](docs/Order.md)
  - [FlockrSocialProofApi.OrderOrderItems](docs/OrderOrderItems.md)
  - [FlockrSocialProofApi.Product](docs/Product.md)

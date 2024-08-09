@@ -14,6 +14,7 @@
  *
  */
 import ApiClient from './ApiClient';
+import AltId from './model/AltId';
 import Event from './model/Event';
 import EventEvent from './model/EventEvent';
 import EventEventData from './model/EventEventData';
@@ -25,6 +26,7 @@ import Message from './model/Message';
 import MessageRaw from './model/MessageRaw';
 import MessageRawLong from './model/MessageRawLong';
 import MessageRawShort from './model/MessageRawShort';
+import OneOfproductProductRecommendationsItems from './model/OneOfproductProductRecommendationsItems';
 import Order from './model/Order';
 import OrderOrderItems from './model/OrderOrderItems';
 import Product from './model/Product';
@@ -85,6 +87,12 @@ export {
      * @property {module:ApiClient}
      */
     ApiClient,
+
+    /**
+     * The AltId model constructor.
+     * @property {module:model/AltId}
+     */
+    AltId,
 
     /**
      * The Event model constructor.
@@ -151,6 +159,12 @@ export {
      * @property {module:model/MessageRawShort}
      */
     MessageRawShort,
+
+    /**
+     * The OneOfproductProductRecommendationsItems model constructor.
+     * @property {module:model/OneOfproductProductRecommendationsItems}
+     */
+    OneOfproductProductRecommendationsItems,
 
     /**
      * The Order model constructor.

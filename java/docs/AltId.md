@@ -1,6 +1,6 @@
-# FlockrSocialProofApi.Product
+# AltId
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**product** | [**ProductProduct**](ProductProduct.md) |  | 
+**altId** | **String** |  | 

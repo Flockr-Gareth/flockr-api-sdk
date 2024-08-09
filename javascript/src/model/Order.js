@@ -32,9 +32,19 @@ export default class Order extends Request {
    * @alias module:model/Order
    * @class
    * @extends module:model/Request
+   * @param id {} The id of the order
+   * @param totalPrice {} The total value of the order including tax and shipping
+   * @param currency {} The ISO code for the order currency
+   * @param orderItems {} 
+   * @param visitor {} 
+   * @param location {} 
    */
-  constructor() {
-    super();
+  constructor(id, totalPrice, currency, orderItems, visitor, location) {
+    super(visitor, location);
+    this.id = id;
+    this.totalPrice = totalPrice;
+    this.currency = currency;
+    this.orderItems = orderItems;
   }
 
   /**

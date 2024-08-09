@@ -26,7 +26,7 @@ import java.io.IOException;
  * EventEvent
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2024-08-09T13:49:56.363387768Z[GMT]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2024-08-09T14:32:01.000659766Z[GMT]")
 
 public class EventEvent {
   @SerializedName("category")
@@ -47,7 +47,7 @@ public class EventEvent {
    * The category of the event
    * @return category
   **/
-  @Schema(example = "basket", description = "The category of the event")
+  @Schema(example = "basket", required = true, description = "The category of the event")
   public String getCategory() {
     return category;
   }
@@ -65,7 +65,7 @@ public class EventEvent {
    * The name of the event
    * @return name
   **/
-  @Schema(example = "add", description = "The name of the event")
+  @Schema(example = "add", required = true, description = "The name of the event")
   public String getName() {
     return name;
   }
@@ -83,7 +83,7 @@ public class EventEvent {
    * Get data
    * @return data
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public EventEventData getData() {
     return data;
   }

@@ -34,7 +34,7 @@ import java.util.List;
  * Order
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2024-08-09T13:49:56.363387768Z[GMT]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2024-08-09T14:32:01.000659766Z[GMT]")
 
 public class Order extends Request {
   @SerializedName("id")
@@ -47,7 +47,7 @@ public class Order extends Request {
   private String currency = null;
 
   @SerializedName("orderItems")
-  private List<OrderOrderItems> orderItems = null;
+  private List<OrderOrderItems> orderItems = new ArrayList<OrderOrderItems>();
 
   public Order id(String id) {
     this.id = id;
@@ -58,7 +58,7 @@ public class Order extends Request {
    * The id of the order
    * @return id
   **/
-  @Schema(example = "abcdefg", description = "The id of the order")
+  @Schema(example = "abcdefg", required = true, description = "The id of the order")
   public String getId() {
     return id;
   }
@@ -76,7 +76,7 @@ public class Order extends Request {
    * The total value of the order including tax and shipping
    * @return totalPrice
   **/
-  @Schema(example = "456.78", description = "The total value of the order including tax and shipping")
+  @Schema(example = "456.78", required = true, description = "The total value of the order including tax and shipping")
   public BigDecimal getTotalPrice() {
     return totalPrice;
   }
@@ -94,7 +94,7 @@ public class Order extends Request {
    * The ISO code for the order currency
    * @return currency
   **/
-  @Schema(example = "GBP", description = "The ISO code for the order currency")
+  @Schema(example = "GBP", required = true, description = "The ISO code for the order currency")
   public String getCurrency() {
     return currency;
   }
@@ -109,9 +109,6 @@ public class Order extends Request {
   }
 
   public Order addOrderItemsItem(OrderOrderItems orderItemsItem) {
-    if (this.orderItems == null) {
-      this.orderItems = new ArrayList<OrderOrderItems>();
-    }
     this.orderItems.add(orderItemsItem);
     return this;
   }
@@ -120,7 +117,7 @@ public class Order extends Request {
    * Get orderItems
    * @return orderItems
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "")
   public List<OrderOrderItems> getOrderItems() {
     return orderItems;
   }

@@ -32,9 +32,11 @@ export default class Event extends Request {
    * @alias module:model/Event
    * @class
    * @extends module:model/Request
+   * @param visitor {} 
+   * @param location {} 
    */
-  constructor() {
-    super();
+  constructor(visitor, location) {
+    super(visitor, location);
   }
 
   /**

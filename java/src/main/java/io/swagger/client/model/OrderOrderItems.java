@@ -25,7 +25,7 @@ import java.io.IOException;
  * OrderOrderItems
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2024-08-09T13:49:56.363387768Z[GMT]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2024-08-09T14:32:01.000659766Z[GMT]")
 
 public class OrderOrderItems {
   @SerializedName("id")
@@ -64,7 +64,7 @@ public class OrderOrderItems {
    * The quantity purchased
    * @return quantity
   **/
-  @Schema(description = "The quantity purchased")
+  @Schema(required = true, description = "The quantity purchased")
   public String getQuantity() {
     return quantity;
   }

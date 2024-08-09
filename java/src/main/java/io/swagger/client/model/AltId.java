@@ -22,52 +22,31 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
 /**
- * RequestDeviceScreen
+ * AltId
  */
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2024-08-09T14:32:01.000659766Z[GMT]")
 
-public class RequestDeviceScreen {
-  @SerializedName("height")
-  private Integer height = null;
+public class AltId implements OneOfproductProductRecommendationsItems {
+  @SerializedName("altId")
+  private String altId = null;
 
-  @SerializedName("width")
-  private Integer width = null;
-
-  public RequestDeviceScreen height(Integer height) {
-    this.height = height;
+  public AltId altId(String altId) {
+    this.altId = altId;
     return this;
   }
 
    /**
-   * Get height
-   * @return height
+   * Get altId
+   * @return altId
   **/
-  @Schema(example = "1200", description = "")
-  public Integer getHeight() {
-    return height;
+  @Schema(required = true, description = "")
+  public String getAltId() {
+    return altId;
   }
 
-  public void setHeight(Integer height) {
-    this.height = height;
-  }
-
-  public RequestDeviceScreen width(Integer width) {
-    this.width = width;
-    return this;
-  }
-
-   /**
-   * Get width
-   * @return width
-  **/
-  @Schema(example = "800", description = "")
-  public Integer getWidth() {
-    return width;
-  }
-
-  public void setWidth(Integer width) {
-    this.width = width;
+  public void setAltId(String altId) {
+    this.altId = altId;
   }
 
 
@@ -79,24 +58,22 @@ public class RequestDeviceScreen {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    RequestDeviceScreen requestDeviceScreen = (RequestDeviceScreen) o;
-    return Objects.equals(this.height, requestDeviceScreen.height) &&
-        Objects.equals(this.width, requestDeviceScreen.width);
+    AltId altId = (AltId) o;
+    return Objects.equals(this.altId, altId.altId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(height, width);
+    return Objects.hash(altId);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class RequestDeviceScreen {\n");
+    sb.append("class AltId {\n");
     
-    sb.append("    height: ").append(toIndentedString(height)).append("\n");
-    sb.append("    width: ").append(toIndentedString(width)).append("\n");
+    sb.append("    altId: ").append(toIndentedString(altId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

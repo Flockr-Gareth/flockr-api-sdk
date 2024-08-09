@@ -80,6 +80,19 @@ export class RequiredError extends Error {
 /**
  * 
  * @export
+ * @interface AltId
+ */
+export interface AltId {
+    /**
+     * 
+     * @type {string}
+     * @memberof AltId
+     */
+    altId: string;
+}
+/**
+ * 
+ * @export
  * @interface Event
  */
 export interface Event extends Request {
@@ -101,19 +114,19 @@ export interface EventEvent {
      * @type {string}
      * @memberof EventEvent
      */
-    category?: string;
+    category: string;
     /**
      * The name of the event
      * @type {string}
      * @memberof EventEvent
      */
-    name?: string;
+    name: string;
     /**
      * 
      * @type {EventEventData}
      * @memberof EventEvent
      */
-    data?: EventEventData;
+    data: EventEventData;
 }
 /**
  * 
@@ -122,13 +135,13 @@ export interface EventEvent {
  */
 export interface EventEventData {
     /**
-     * The id of the product
+     * The id of the product (you can specify label, label & altId or altId)
      * @type {string}
      * @memberof EventEventData
      */
     label?: string;
     /**
-     * An alternative ID for the product
+     * An alternative ID for the product (you can specify label, label & altId or altId)
      * @type {string}
      * @memberof EventEventData
      */
@@ -138,7 +151,7 @@ export interface EventEventData {
      * @type {number}
      * @memberof EventEventData
      */
-    value?: number;
+    value: number;
 }
 /**
  * 
@@ -158,6 +171,12 @@ export interface Flockr {
      * @memberof Flockr
      */
     socialProof?: Array<SocialProof>;
+    /**
+     * 
+     * @type {Array<SocialProof>}
+     * @memberof Flockr
+     */
+    recommendations?: Array<SocialProof>;
 }
 /**
  * 
@@ -179,17 +198,17 @@ export interface FlockrResult {
  */
 export interface List extends Request {
     /**
-     * The category of the products
+     * The category of the products - should not be an empty string
      * @type {string}
      * @memberof List
      */
-    category?: string;
+    category: string;
     /**
      * An array of product IDs, also accepts an array of altIds, e.g. [{altId:\"abcdefg\"}]
      * @type {Array<string>}
      * @memberof List
      */
-    products?: Array<string>;
+    products: Array<string>;
     /**
      * Optional list of product IDs to fetch proof values for (can be requested on a dedicated call instead if required)
      * @type {Array<string>}
@@ -208,13 +227,13 @@ export interface ListOnly extends Request {
      * @type {string}
      * @memberof ListOnly
      */
-    category?: string;
+    category: string;
     /**
      * An array of product IDs, also accepts an array of altIds, e.g. [{altId:\"abcdefg\"}]
      * @type {Array<string>}
      * @memberof ListOnly
      */
-    products?: Array<string>;
+    products: Array<string>;
 }
 /**
  * 
@@ -404,25 +423,25 @@ export interface Order extends Request {
      * @type {string}
      * @memberof Order
      */
-    id?: string;
+    id: string;
     /**
      * The total value of the order including tax and shipping
      * @type {number}
      * @memberof Order
      */
-    totalPrice?: number;
+    totalPrice: number;
     /**
      * The ISO code for the order currency
      * @type {string}
      * @memberof Order
      */
-    currency?: string;
+    currency: string;
     /**
      * 
      * @type {Array<OrderOrderItems>}
      * @memberof Order
      */
-    orderItems?: Array<OrderOrderItems>;
+    orderItems: Array<OrderOrderItems>;
 }
 /**
  * 
@@ -441,7 +460,7 @@ export interface OrderOrderItems {
      * @type {string}
      * @memberof OrderOrderItems
      */
-    quantity?: string;
+    quantity: string;
     /**
      * The altId of the product (if the product ID is not available). You should use either id or altId
      * @type {string}
@@ -460,7 +479,7 @@ export interface Product extends Request {
      * @type {ProductProduct}
      * @memberof Product
      */
-    product?: ProductProduct;
+    product: ProductProduct;
 }
 /**
  * 
@@ -479,7 +498,7 @@ export interface ProductProduct {
      * @type {string}
      * @memberof ProductProduct
      */
-    id?: string;
+    id: string;
     /**
      * The category of the product
      * @type {string}
@@ -506,10 +525,10 @@ export interface ProductProduct {
     name?: string;
     /**
      * Optional list of product IDs to fetch proof values for (can be requested on a dedicated call instead if required)
-     * @type {Array<string>}
+     * @type {Array<string | AltId>}
      * @memberof ProductProduct
      */
-    recommendations?: Array<string>;
+    recommendations?: Array<string | AltId>;
     /**
      * An optinal SKU for the product
      * @type {string}
@@ -534,13 +553,13 @@ export interface Request {
      * @type {RequestVisitor}
      * @memberof Request
      */
-    visitor?: RequestVisitor;
+    visitor: RequestVisitor;
     /**
      * 
      * @type {RequestLocation}
      * @memberof Request
      */
-    location?: RequestLocation;
+    location: RequestLocation;
     /**
      * 
      * @type {RequestLocale}
@@ -616,7 +635,7 @@ export interface RequestLocation {
      * @type {string}
      * @memberof RequestLocation
      */
-    host?: string;
+    host: string;
 }
 /**
  * 
@@ -629,13 +648,13 @@ export interface RequestVisitor {
      * @type {string}
      * @memberof RequestVisitor
      */
-    id?: string;
+    id: string;
     /**
      * A unique id for the session
      * @type {string}
      * @memberof RequestVisitor
      */
-    sessionId?: string;
+    sessionId: string;
 }
 /**
  * 

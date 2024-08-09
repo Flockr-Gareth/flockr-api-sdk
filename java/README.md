@@ -2,7 +2,7 @@
 
 Flockr Social Proof API
 - API version: 1.0.0
-  - Build date: 2024-08-09T13:49:56.363387768Z[GMT]
+  - Build date: 2024-08-09T14:32:01.000659766Z[GMT]
 
 API for sending product user actions and retrieving social proof
 
@@ -101,7 +101,7 @@ public class CartApiExample {
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *https://api.cdn.flockr.co/api/v2/key*
+All URIs are relative to *https://virtserver.swaggerhub.com/Flockr_AI/Flockr/1.0.0*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
@@ -118,6 +118,7 @@ Class | Method | HTTP request | Description
 
 ## Documentation for Models
 
+ - [AltId](docs/AltId.md)
  - [Event](docs/Event.md)
  - [EventEvent](docs/EventEvent.md)
  - [EventEventData](docs/EventEventData.md)
@@ -129,6 +130,7 @@ Class | Method | HTTP request | Description
  - [MessageRaw](docs/MessageRaw.md)
  - [MessageRawLong](docs/MessageRawLong.md)
  - [MessageRawShort](docs/MessageRawShort.md)
+ - [OneOfproductProductRecommendationsItems](docs/OneOfproductProductRecommendationsItems.md)
  - [Order](docs/Order.md)
  - [OrderOrderItems](docs/OrderOrderItems.md)
  - [Product](docs/Product.md)

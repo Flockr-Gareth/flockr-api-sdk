@@ -32,9 +32,13 @@ export default class Product extends Request {
    * @alias module:model/Product
    * @class
    * @extends module:model/Request
+   * @param product {} 
+   * @param visitor {} 
+   * @param location {} 
    */
-  constructor() {
-    super();
+  constructor(product, visitor, location) {
+    super(visitor, location);
+    this.product = product;
   }
 
   /**

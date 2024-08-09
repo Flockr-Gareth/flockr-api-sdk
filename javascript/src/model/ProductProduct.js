@@ -25,8 +25,10 @@ export default class ProductProduct {
    * Constructs a new <code>ProductProduct</code>.
    * @alias module:model/ProductProduct
    * @class
+   * @param id {String} The unique ID for the product - must be a string
    */
-  constructor() {
+  constructor(id) {
+    this.id = id;
   }
 
   /**
@@ -52,7 +54,7 @@ export default class ProductProduct {
       if (data.hasOwnProperty('name'))
         obj.name = ApiClient.convertToType(data['name'], 'String');
       if (data.hasOwnProperty('recommendations'))
-        obj.recommendations = ApiClient.convertToType(data['recommendations'], ['String']);
+        obj.recommendations = ApiClient.convertToType(data['recommendations'], [OneOfproductProductRecommendationsItems]);
       if (data.hasOwnProperty('sku'))
         obj.sku = ApiClient.convertToType(data['sku'], 'String');
       if (data.hasOwnProperty('url'))

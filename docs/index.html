@@ -689,6 +689,15 @@
   <script>
     // Script section to load models into a JS Var
     var defs = {}
+            defs["altId"] = {
+  "required" : [ "altId" ],
+  "type" : "object",
+  "properties" : {
+    "altId" : {
+      "type" : "string"
+    }
+  }
+};
             defs["event"] = {
   "allOf" : [ {
     "$ref" : "#/components/schemas/request"
@@ -702,6 +711,7 @@
   } ]
 };
             defs["event_event"] = {
+  "required" : [ "category", "data", "name" ],
   "type" : "object",
   "properties" : {
     "category" : {
@@ -720,16 +730,17 @@
   }
 };
             defs["event_event_data"] = {
+  "required" : [ "value" ],
   "type" : "object",
   "properties" : {
     "label" : {
       "type" : "string",
-      "description" : "The id of the product",
+      "description" : "The id of the product (you can specify label, label & altId or altId)",
       "example" : "1725"
     },
     "altId" : {
       "type" : "string",
-      "description" : "An alternative ID for the product",
+      "description" : "An alternative ID for the product (you can specify label, label & altId or altId)",
       "example" : "abcdefg"
     },
     "value" : {
@@ -750,6 +761,12 @@
       "items" : {
         "$ref" : "#/components/schemas/socialProof"
       }
+    },
+    "recommendations" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/socialProof"
+      }
     }
   }
 };
@@ -765,11 +782,12 @@
   "allOf" : [ {
     "$ref" : "#/components/schemas/request"
   }, {
+    "required" : [ "category", "products" ],
     "type" : "object",
     "properties" : {
       "category" : {
         "type" : "string",
-        "description" : "The category of the products",
+        "description" : "The category of the products - should not be an empty string",
         "example" : "Bathroom Tiles"
       },
       "products" : {
@@ -795,6 +813,7 @@
   "allOf" : [ {
     "$ref" : "#/components/schemas/request"
   }, {
+    "required" : [ "category", "products" ],
     "type" : "object",
     "properties" : {
       "category" : {
@@ -886,10 +905,12 @@
     }
   }
 };
+            defs["OneOfproduct_productRecommendationsItems"] = {};
             defs["order"] = {
   "allOf" : [ {
     "$ref" : "#/components/schemas/request"
   }, {
+    "required" : [ "currency", "id", "orderItems", "totalPrice" ],
     "type" : "object",
     "properties" : {
       "id" : {
@@ -917,6 +938,7 @@
   } ]
 };
             defs["order_orderItems"] = {
+  "required" : [ "quantity" ],
   "type" : "object",
   "properties" : {
     "id" : {
@@ -937,6 +959,7 @@
   "allOf" : [ {
     "$ref" : "#/components/schemas/request"
   }, {
+    "required" : [ "product" ],
     "type" : "object",
     "properties" : {
       "product" : {
@@ -946,6 +969,7 @@
   } ]
 };
             defs["product_product"] = {
+  "required" : [ "id" ],
   "type" : "object",
   "properties" : {
     "altId" : {
@@ -983,7 +1007,12 @@
       "description" : "Optional list of product IDs to fetch proof values for (can be requested on a dedicated call instead if required)",
       "example" : [ 7654, 3456 ],
       "items" : {
-        "type" : "string"
+        "type" : "string",
+        "oneOf" : [ {
+          "type" : "string"
+        }, {
+          "$ref" : "#/components/schemas/altId"
+        } ]
       }
     },
     "sku" : {
@@ -999,6 +1028,7 @@
   }
 };
             defs["request"] = {
+  "required" : [ "location", "visitor" ],
   "type" : "object",
   "properties" : {
     "visitor" : {
@@ -1050,6 +1080,7 @@
   }
 };
             defs["request_location"] = {
+  "required" : [ "host" ],
   "type" : "object",
   "properties" : {
     "host" : {
@@ -1060,6 +1091,7 @@
   }
 };
             defs["request_visitor"] = {
+  "required" : [ "id", "sessionId" ],
   "type" : "object",
   "properties" : {
     "id" : {
@@ -2121,7 +2153,44 @@ except ApiException as e:
             "time" : 1
           } ]
         } ],
-        "recommendations" : [ ]
+        "recommendations" : [ {
+          "product" : {
+            "id" : "7515",
+            "messages" : [ {
+              "code" : "CAP",
+              "message" : "<div class=\"flockr-dt\"><strong>Popular choice!</strong>18 people are looking at this right now</div><div class=\"flockr-mb\"><strong>Popular!</strong>18 views</div>",
+              "category" : "AUDIENCE",
+              "raw" : {
+                "data" : 18,
+                "short" : {
+                  "heading" : "Popular!",
+                  "text" : "18 views"
+                },
+                "long" : {
+                  "heading" : "Popular choice!",
+                  "text" : "18 people are looking at this right now"
+                }
+              },
+              "time" : "now_view_count"
+            }, {
+              "code" : "SLVB",
+              "message" : "<div class=\"flockr-dt\"><strong>Popular choice!</strong>{{311}} {{unit}} added to basket since your last visit 1 hour ago</div><div class=\"flockr-mb\"><strong>Popular!</strong>{{311}} {{unit}} added since last visit</div>",
+              "category" : "AUDIENCE",
+              "raw" : {
+                "data" : 311,
+                "short" : {
+                  "heading" : "Popular!",
+                  "text" : "311 boxes added since last visit"
+                },
+                "long" : {
+                  "heading" : "Popular choice!",
+                  "text" : "311 boxes added to basket since your last visit 1 hour ago"
+                }
+              },
+              "time" : 1
+            } ]
+          }
+        } ]
       }
     }
   }

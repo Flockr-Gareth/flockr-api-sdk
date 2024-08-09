@@ -25,8 +25,10 @@ export default class RequestLocation {
    * Constructs a new <code>RequestLocation</code>.
    * @alias module:model/RequestLocation
    * @class
+   * @param host {String} The host name or ip address
    */
-  constructor() {
+  constructor(host) {
+    this.host = host;
   }
 
   /**

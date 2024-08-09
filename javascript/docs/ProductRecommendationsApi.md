@@ -1,6 +1,6 @@
 # FlockrSocialProofApi.ProductRecommendationsApi
 
-All URIs are relative to *https://api.cdn.flockr.co/api/v2/key*
+All URIs are relative to *https://virtserver.swaggerhub.com/Flockr_AI/Flockr/1.0.0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------

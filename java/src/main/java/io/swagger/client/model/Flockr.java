@@ -29,7 +29,7 @@ import java.util.List;
  * Flockr
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2024-08-09T13:49:56.363387768Z[GMT]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2024-08-09T14:32:01.000659766Z[GMT]")
 
 public class Flockr {
   @SerializedName("result")
@@ -37,6 +37,9 @@ public class Flockr {
 
   @SerializedName("socialProof")
   private List<SocialProof> socialProof = null;
+
+  @SerializedName("recommendations")
+  private List<SocialProof> recommendations = null;
 
   public Flockr result(FlockrResult result) {
     this.result = result;
@@ -82,6 +85,32 @@ public class Flockr {
     this.socialProof = socialProof;
   }
 
+  public Flockr recommendations(List<SocialProof> recommendations) {
+    this.recommendations = recommendations;
+    return this;
+  }
+
+  public Flockr addRecommendationsItem(SocialProof recommendationsItem) {
+    if (this.recommendations == null) {
+      this.recommendations = new ArrayList<SocialProof>();
+    }
+    this.recommendations.add(recommendationsItem);
+    return this;
+  }
+
+   /**
+   * Get recommendations
+   * @return recommendations
+  **/
+  @Schema(description = "")
+  public List<SocialProof> getRecommendations() {
+    return recommendations;
+  }
+
+  public void setRecommendations(List<SocialProof> recommendations) {
+    this.recommendations = recommendations;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -93,12 +122,13 @@ public class Flockr {
     }
     Flockr flockr = (Flockr) o;
     return Objects.equals(this.result, flockr.result) &&
-        Objects.equals(this.socialProof, flockr.socialProof);
+        Objects.equals(this.socialProof, flockr.socialProof) &&
+        Objects.equals(this.recommendations, flockr.recommendations);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(result, socialProof);
+    return Objects.hash(result, socialProof, recommendations);
   }
 
 
@@ -109,6 +139,7 @@ public class Flockr {
     
     sb.append("    result: ").append(toIndentedString(result)).append("\n");
     sb.append("    socialProof: ").append(toIndentedString(socialProof)).append("\n");
+    sb.append("    recommendations: ").append(toIndentedString(recommendations)).append("\n");
     sb.append("}");
     return sb.toString();
   }

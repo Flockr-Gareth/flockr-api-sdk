@@ -32,9 +32,9 @@ export default class ApiClient {
         /**
          * The base URL against which to resolve every API call's (relative) path.
          * @type {String}
-         * @default https://api.cdn.flockr.co/api/v2/key
+         * @default https://virtserver.swaggerhub.com/Flockr_AI/Flockr/1.0.0
          */
-        this.basePath = 'https://api.cdn.flockr.co/api/v2/key'.replace(/\/+$/, '');
+        this.basePath = 'https://virtserver.swaggerhub.com/Flockr_AI/Flockr/1.0.0'.replace(/\/+$/, '');
 
         /**
          * The authentication methods to be included for all API calls.
