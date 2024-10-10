@@ -29,17 +29,34 @@
 
   var instance;
 
+  beforeEach(function() {
+    instance = new FlockrSocialProofApi.ImageApi();
+  });
+
   describe('(package)', function() {
-    describe('OneOfproductProductRecommendationsItems', function() {
-      beforeEach(function() {
-        instance = new FlockrSocialProofApi.OneOfproductProductRecommendationsItems();
-      });
+    describe('ImageApi', function() {
+      describe('image', function() {
+        it('should call image successfully', function(done) {
+          // TODO: uncomment, update parameter values for image call and complete the assertions
+          /*
+          var opts = {};
 
-      it('should create an instance of OneOfproductProductRecommendationsItems', function() {
-        // TODO: update the code to test OneOfproductProductRecommendationsItems
-        expect(instance).to.be.a(FlockrSocialProofApi.OneOfproductProductRecommendationsItems);
-      });
+          instance.image(apiKey, image, productId, visitorId, sessionId, opts, function(error, data, response) {
+            if (error) {
+              done(error);
+              return;
+            }
+            // TODO: update response assertions
+            expect(data).to.be.a(Blob);
+            // expect(data).to.be(null);
 
+            done();
+          });
+          */
+          // TODO: uncomment and complete method invocation above, then delete this line and the next:
+          done();
+        });
+      });
     });
   });
 
