@@ -2,7 +2,7 @@
 
 Flockr Social Proof API
 - API version: 1.0.0
-  - Build date: 2024-08-09T14:32:01.000659766Z[GMT]
+  - Build date: 2024-10-10T17:19:06.736915463Z[GMT]
 
 API for sending product user actions and retrieving social proof
 
@@ -108,6 +108,7 @@ Class | Method | HTTP request | Description
 *CartApi* | [**cartDrawer**](docs/CartApi.md#cartDrawer) | **POST** /{apiKey}/cartDrawer/visit | Fetches a set of proofs for the provided product IDs. Flockr will decide which products to return proofs for
 *ConversionOrderApi* | [**order**](docs/ConversionOrderApi.md#order) | **POST** /{apiKey}/conversion/order | saves a product order and returns social proof
 *CustomerEventApi* | [**event**](docs/CustomerEventApi.md#event) | **POST** /{apiKey}/event | Registers an event for the customer
+*ImageApi* | [**image**](docs/ImageApi.md#image) | **GET** /{apiKey}/image | returns an image containing the social proof for the product, Note use https://flockr-cdn.com as the host in production
 *ListApi* | [**cartDrawer**](docs/ListApi.md#cartDrawer) | **POST** /{apiKey}/cartDrawer/visit | Fetches a set of proofs for the provided product IDs. Flockr will decide which products to return proofs for
 *ListApi* | [**samplesList**](docs/ListApi.md#samplesList) | **POST** /{apiKey}/samplesList/visit | Fetches a set of proofs for the provided product IDs based on sample interactions, e.g, number of samples for a given product ordered. Flockr will decide which products to return proofs for
 *PredictiveSearchApi* | [**predictiveSearch**](docs/PredictiveSearchApi.md#predictiveSearch) | **POST** /{apiKey}/predictiveSearch/visit | Fetches a set of proofs for the provided product IDs. Flockr will decide which products to return proofs for

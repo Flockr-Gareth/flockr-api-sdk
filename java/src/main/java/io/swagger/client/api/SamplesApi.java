@@ -37,6 +37,7 @@ import java.util.Map;
 
 public class SamplesApi {
     private ApiClient apiClient;
+    private Map<String, String> headers;
 
     public SamplesApi() {
         this(Configuration.getDefaultApiClient());
@@ -52,6 +53,10 @@ public class SamplesApi {
 
     public void setApiClient(ApiClient apiClient) {
         this.apiClient = apiClient;
+    }
+
+    public void setHeadersOverrides(Map<String, String> headers) {
+        this.headers = headers;
     }
 
     /**
@@ -108,6 +113,9 @@ public class SamplesApi {
         }
 
         String[] localVarAuthNames = new String[] {  };
+        if (headers != null) {
+            localVarHeaderParams.putAll(headers);
+        }
         return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
     

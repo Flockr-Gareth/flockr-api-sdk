@@ -25,7 +25,7 @@ import java.io.IOException;
  * MessageRawShort
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2024-08-09T14:32:01.000659766Z[GMT]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2024-10-10T17:19:06.736915463Z[GMT]")
 
 public class MessageRawShort {
   @SerializedName("heading")

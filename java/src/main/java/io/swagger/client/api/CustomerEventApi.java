@@ -37,6 +37,7 @@ import java.util.Map;
 
 public class CustomerEventApi {
     private ApiClient apiClient;
+    private Map<String, String> headers;
 
     public CustomerEventApi() {
         this(Configuration.getDefaultApiClient());
@@ -52,6 +53,10 @@ public class CustomerEventApi {
 
     public void setApiClient(ApiClient apiClient) {
         this.apiClient = apiClient;
+    }
+
+    public void setHeadersOverrides(Map<String, String> headers) {
+        this.headers = headers;
     }
 
     /**
@@ -102,6 +107,9 @@ public class CustomerEventApi {
         }
 
         String[] localVarAuthNames = new String[] {  };
+        if (headers != null) {
+            localVarHeaderParams.putAll(headers);
+        }
         return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
     
