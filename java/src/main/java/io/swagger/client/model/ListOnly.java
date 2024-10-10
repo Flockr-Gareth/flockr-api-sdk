@@ -32,7 +32,7 @@ import java.util.List;
  * ListOnly
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2024-08-09T14:32:01.000659766Z[GMT]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2024-10-10T17:35:19.331632027Z[GMT]")
 
 public class ListOnly extends Request {
   @SerializedName("category")
