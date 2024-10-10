@@ -2,7 +2,7 @@
 
 Flockr Social Proof API
 - API version: 1.0.0
-  - Build date: 2024-10-10T17:19:06.736915463Z[GMT]
+  - Build date: 2024-10-10T17:35:19.331632027Z[GMT]
 
 API for sending product user actions and retrieving social proof
 
