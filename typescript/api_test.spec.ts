@@ -64,6 +64,25 @@ describe("CustomerEventApi", () => {
   })
 })
 
+describe("ImageApi", () => {
+  let instance: api.ImageApi
+  beforeEach(function() {
+    instance = new api.ImageApi(config)
+  });
+
+  test("image", () => {
+    const apiKey: string = "apiKey_example"
+    const image: string = "image_example"
+    const productId: string = "productId_example"
+    const visitorId: string = "visitorId_example"
+    const sessionId: string = "sessionId_example"
+    const host: string = "host_example"
+    const location: string = "location_example"
+    const transparent: boolean = true
+    return expect(instance.image(apiKey, image, productId, visitorId, sessionId, host, location, transparent, {})).resolves.toBe(null)
+  })
+})
+
 describe("ListApi", () => {
   let instance: api.ListApi
   beforeEach(function() {

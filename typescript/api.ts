@@ -1103,6 +1103,183 @@ export class CustomerEventApi extends BaseAPI {
 
 }
 /**
+ * ImageApi - fetch parameter creator
+ * @export
+ */
+export const ImageApiFetchParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @summary returns an image containing the social proof for the product, Note use https://flockr-cdn.com as the host in production
+         * @param {string} apiKey your api key
+         * @param {string} image URL Encoded path to the image to add/overlay social proof messages
+         * @param {string} productId the unique ID of the product, must be the same ID as used in product visit
+         * @param {string} visitorId A unique id for the visitor
+         * @param {string} sessionId A unique id for the session
+         * @param {string} [host] The host name or ip address
+         * @param {string} [location] the location of the messages in the site/app, e.g. \&quot;PLP\&quot;, \&quot;PDP\&quot;, \&quot;cart\&quot; etc.
+         * @param {boolean} [transparent] If transparent is false (default), returns the input image with the social proof ovelayed, if no social proof values exist for the product a 301 redirect is returned. If transparent is true, returns a transparent image to the size of the input image with the social proof message, if no social proof values for the given product a 1x1px transparent image is returned.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        image(apiKey: string, image: string, productId: string, visitorId: string, sessionId: string, host?: string, location?: string, transparent?: boolean, options: any = {}): FetchArgs {
+            // verify required parameter 'apiKey' is not null or undefined
+            if (apiKey === null || apiKey === undefined) {
+                throw new RequiredError('apiKey','Required parameter apiKey was null or undefined when calling image.');
+            }
+            // verify required parameter 'image' is not null or undefined
+            if (image === null || image === undefined) {
+                throw new RequiredError('image','Required parameter image was null or undefined when calling image.');
+            }
+            // verify required parameter 'productId' is not null or undefined
+            if (productId === null || productId === undefined) {
+                throw new RequiredError('productId','Required parameter productId was null or undefined when calling image.');
+            }
+            // verify required parameter 'visitorId' is not null or undefined
+            if (visitorId === null || visitorId === undefined) {
+                throw new RequiredError('visitorId','Required parameter visitorId was null or undefined when calling image.');
+            }
+            // verify required parameter 'sessionId' is not null or undefined
+            if (sessionId === null || sessionId === undefined) {
+                throw new RequiredError('sessionId','Required parameter sessionId was null or undefined when calling image.');
+            }
+            const localVarPath = `/{apiKey}/image`
+                .replace(`{${"apiKey"}}`, encodeURIComponent(String(apiKey)));
+            const localVarUrlObj = url.parse(localVarPath, true);
+            const localVarRequestOptions = Object.assign({ method: 'GET' }, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (host !== undefined) {
+                localVarQueryParameter['host'] = host;
+            }
+
+            if (image !== undefined) {
+                localVarQueryParameter['image'] = image;
+            }
+
+            if (productId !== undefined) {
+                localVarQueryParameter['productId'] = productId;
+            }
+
+            if (visitorId !== undefined) {
+                localVarQueryParameter['visitorId'] = visitorId;
+            }
+
+            if (sessionId !== undefined) {
+                localVarQueryParameter['sessionId'] = sessionId;
+            }
+
+            if (location !== undefined) {
+                localVarQueryParameter['location'] = location;
+            }
+
+            if (transparent !== undefined) {
+                localVarQueryParameter['transparent'] = transparent;
+            }
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            localVarUrlObj.search = null;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * ImageApi - functional programming interface
+ * @export
+ */
+export const ImageApiFp = function(configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @summary returns an image containing the social proof for the product, Note use https://flockr-cdn.com as the host in production
+         * @param {string} apiKey your api key
+         * @param {string} image URL Encoded path to the image to add/overlay social proof messages
+         * @param {string} productId the unique ID of the product, must be the same ID as used in product visit
+         * @param {string} visitorId A unique id for the visitor
+         * @param {string} sessionId A unique id for the session
+         * @param {string} [host] The host name or ip address
+         * @param {string} [location] the location of the messages in the site/app, e.g. \&quot;PLP\&quot;, \&quot;PDP\&quot;, \&quot;cart\&quot; etc.
+         * @param {boolean} [transparent] If transparent is false (default), returns the input image with the social proof ovelayed, if no social proof values exist for the product a 301 redirect is returned. If transparent is true, returns a transparent image to the size of the input image with the social proof message, if no social proof values for the given product a 1x1px transparent image is returned.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        image(apiKey: string, image: string, productId: string, visitorId: string, sessionId: string, host?: string, location?: string, transparent?: boolean, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Blob> {
+            const localVarFetchArgs = ImageApiFetchParamCreator(configuration).image(apiKey, image, productId, visitorId, sessionId, host, location, transparent, options);
+            return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
+                return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
+                    if (response.status >= 200 && response.status < 300) {
+                        return response.json();
+                    } else {
+                        throw response;
+                    }
+                });
+            };
+        },
+    }
+};
+
+/**
+ * ImageApi - factory interface
+ * @export
+ */
+export const ImageApiFactory = function (configuration?: Configuration, fetch?: FetchAPI, basePath?: string) {
+    return {
+        /**
+         * 
+         * @summary returns an image containing the social proof for the product, Note use https://flockr-cdn.com as the host in production
+         * @param {string} apiKey your api key
+         * @param {string} image URL Encoded path to the image to add/overlay social proof messages
+         * @param {string} productId the unique ID of the product, must be the same ID as used in product visit
+         * @param {string} visitorId A unique id for the visitor
+         * @param {string} sessionId A unique id for the session
+         * @param {string} [host] The host name or ip address
+         * @param {string} [location] the location of the messages in the site/app, e.g. \&quot;PLP\&quot;, \&quot;PDP\&quot;, \&quot;cart\&quot; etc.
+         * @param {boolean} [transparent] If transparent is false (default), returns the input image with the social proof ovelayed, if no social proof values exist for the product a 301 redirect is returned. If transparent is true, returns a transparent image to the size of the input image with the social proof message, if no social proof values for the given product a 1x1px transparent image is returned.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        image(apiKey: string, image: string, productId: string, visitorId: string, sessionId: string, host?: string, location?: string, transparent?: boolean, options?: any) {
+            return ImageApiFp(configuration).image(apiKey, image, productId, visitorId, sessionId, host, location, transparent, options)(fetch, basePath);
+        },
+    };
+};
+
+/**
+ * ImageApi - object-oriented interface
+ * @export
+ * @class ImageApi
+ * @extends {BaseAPI}
+ */
+export class ImageApi extends BaseAPI {
+    /**
+     * 
+     * @summary returns an image containing the social proof for the product, Note use https://flockr-cdn.com as the host in production
+     * @param {string} apiKey your api key
+     * @param {string} image URL Encoded path to the image to add/overlay social proof messages
+     * @param {string} productId the unique ID of the product, must be the same ID as used in product visit
+     * @param {string} visitorId A unique id for the visitor
+     * @param {string} sessionId A unique id for the session
+     * @param {string} [host] The host name or ip address
+     * @param {string} [location] the location of the messages in the site/app, e.g. \&quot;PLP\&quot;, \&quot;PDP\&quot;, \&quot;cart\&quot; etc.
+     * @param {boolean} [transparent] If transparent is false (default), returns the input image with the social proof ovelayed, if no social proof values exist for the product a 301 redirect is returned. If transparent is true, returns a transparent image to the size of the input image with the social proof message, if no social proof values for the given product a 1x1px transparent image is returned.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ImageApi
+     */
+    public image(apiKey: string, image: string, productId: string, visitorId: string, sessionId: string, host?: string, location?: string, transparent?: boolean, options?: any) {
+        return ImageApiFp(this.configuration).image(apiKey, image, productId, visitorId, sessionId, host, location, transparent, options)(this.fetch, this.basePath);
+    }
+
+}
+/**
  * ListApi - fetch parameter creator
  * @export
  */
