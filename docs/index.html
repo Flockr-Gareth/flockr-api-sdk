@@ -1177,6 +1177,10 @@
                     <li data-group="CustomerEvent" data-name="event" class="">
                       <a href="#api-CustomerEvent-event">event</a>
                     </li>
+                  <li class="nav-header" data-group="Image"><a href="#api-Image">API Methods - Image</a></li>
+                    <li data-group="Image" data-name="image" class="">
+                      <a href="#api-Image-image">image</a>
+                    </li>
                   <li class="nav-header" data-group="List"><a href="#api-List">API Methods - List</a></li>
                     <li data-group="List" data-name="cartDrawer" class="">
                       <a href="#api-List-cartDrawer">cartDrawer</a>
@@ -2635,6 +2639,523 @@ except ApiException as e:
                                     </script>
                                   </div>
                                   <input id='responses-event-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                      <hr>
+                  </section>
+                <section id="api-Image">
+                  <h1>Image</h1>
+                    <div id="api-Image-image">
+                      <article id="api-Image-image-0" data-group="User" data-name="image" data-version="0">
+                        <div class="pull-left">
+                          <h1>image</h1>
+                          <p>returns an image containing the social proof for the product, Note use https://flockr-cdn.com as the host in production</p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/{apiKey}/image</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-Image-image-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-Image-image-0-java">Java</a></li>
+                          <li class=""><a href="#examples-Image-image-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-Image-image-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-Image-image-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-Image-image-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-Image-image-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-Image-image-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-Image-image-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-Image-image-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-Image-image-0-python">Python</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Image-image-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X GET\
+-H "Accept: image/webp"\
+"https://virtserver.swaggerhub.com/Flockr_AI/Flockr/1.0.0/{apiKey}/image?host=&image=&productId=&visitorId=&sessionId=&location=&transparent="</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-Image-image-0-java">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import io.swagger.client.api.ImageApi;
+
+import java.io.File;
+import java.util.*;
+
+public class ImageApiExample {
+
+    public static void main(String[] args) {
+        
+        ImageApi apiInstance = new ImageApi();
+        String apiKey = apiKey_example; // String | your api key
+        String image = image_example; // String | URL Encoded path to the image to add/overlay social proof messages
+        String productId = productId_example; // String | the unique ID of the product, must be the same ID as used in product visit
+        String visitorId = visitorId_example; // String | A unique id for the visitor
+        String sessionId = sessionId_example; // String | A unique id for the session
+        String host = host_example; // String | The host name or ip address
+        String location = location_example; // String | the location of the messages in the site/app, e.g. "PLP", "PDP", "cart" etc.
+        Boolean transparent = true; // Boolean | If transparent is false (default), returns the input image with the social proof ovelayed, if no social proof values exist for the product a 301 redirect is returned. If transparent is true, returns a transparent image to the size of the input image with the social proof message, if no social proof values for the given product a 1x1px transparent image is returned.
+        try {
+            byte[] result = apiInstance.image(apiKey, image, productId, visitorId, sessionId, host, location, transparent);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling ImageApi#image");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-Image-image-0-android">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.ImageApi;
+
+public class ImageApiExample {
+
+    public static void main(String[] args) {
+        ImageApi apiInstance = new ImageApi();
+        String apiKey = apiKey_example; // String | your api key
+        String image = image_example; // String | URL Encoded path to the image to add/overlay social proof messages
+        String productId = productId_example; // String | the unique ID of the product, must be the same ID as used in product visit
+        String visitorId = visitorId_example; // String | A unique id for the visitor
+        String sessionId = sessionId_example; // String | A unique id for the session
+        String host = host_example; // String | The host name or ip address
+        String location = location_example; // String | the location of the messages in the site/app, e.g. "PLP", "PDP", "cart" etc.
+        Boolean transparent = true; // Boolean | If transparent is false (default), returns the input image with the social proof ovelayed, if no social proof values exist for the product a 301 redirect is returned. If transparent is true, returns a transparent image to the size of the input image with the social proof message, if no social proof values for the given product a 1x1px transparent image is returned.
+        try {
+            byte[] result = apiInstance.image(apiKey, image, productId, visitorId, sessionId, host, location, transparent);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling ImageApi#image");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-Image-image-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-Image-image-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">String *apiKey = apiKey_example; // your api key
+String *image = image_example; // URL Encoded path to the image to add/overlay social proof messages
+String *productId = productId_example; // the unique ID of the product, must be the same ID as used in product visit
+String *visitorId = visitorId_example; // A unique id for the visitor
+String *sessionId = sessionId_example; // A unique id for the session
+String *host = host_example; // The host name or ip address (optional)
+String *location = location_example; // the location of the messages in the site/app, e.g. "PLP", "PDP", "cart" etc. (optional)
+Boolean *transparent = true; // If transparent is false (default), returns the input image with the social proof ovelayed, if no social proof values exist for the product a 301 redirect is returned. If transparent is true, returns a transparent image to the size of the input image with the social proof message, if no social proof values for the given product a 1x1px transparent image is returned. (optional)
+
+ImageApi *apiInstance = [[ImageApi alloc] init];
+
+// returns an image containing the social proof for the product, Note use https://flockr-cdn.com as the host in production
+[apiInstance imageWith:apiKey
+    image:image
+    productId:productId
+    visitorId:visitorId
+    sessionId:sessionId
+    host:host
+    location:location
+    transparent:transparent
+              completionHandler: ^(byte[] output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Image-image-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var FlockrSocialProofApi = require('flockr_social_proof_api');
+
+var api = new FlockrSocialProofApi.ImageApi()
+var apiKey = apiKey_example; // {{String}} your api key
+var image = image_example; // {{String}} URL Encoded path to the image to add/overlay social proof messages
+var productId = productId_example; // {{String}} the unique ID of the product, must be the same ID as used in product visit
+var visitorId = visitorId_example; // {{String}} A unique id for the visitor
+var sessionId = sessionId_example; // {{String}} A unique id for the session
+var opts = { 
+  'host': host_example, // {{String}} The host name or ip address
+  'location': location_example, // {{String}} the location of the messages in the site/app, e.g. "PLP", "PDP", "cart" etc.
+  'transparent': true // {{Boolean}} If transparent is false (default), returns the input image with the social proof ovelayed, if no social proof values exist for the product a 301 redirect is returned. If transparent is true, returns a transparent image to the size of the input image with the social proof message, if no social proof values for the given product a 1x1px transparent image is returned.
+};
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.image(apiKey, image, productId, visitorId, sessionId, opts, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-Image-image-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-Image-image-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using IO.Swagger.Api;
+using IO.Swagger.Client;
+using IO.Swagger.Model;
+
+namespace Example
+{
+    public class imageExample
+    {
+        public void main()
+        {
+
+            var apiInstance = new ImageApi();
+            var apiKey = apiKey_example;  // String | your api key
+            var image = image_example;  // String | URL Encoded path to the image to add/overlay social proof messages
+            var productId = productId_example;  // String | the unique ID of the product, must be the same ID as used in product visit
+            var visitorId = visitorId_example;  // String | A unique id for the visitor
+            var sessionId = sessionId_example;  // String | A unique id for the session
+            var host = host_example;  // String | The host name or ip address (optional) 
+            var location = location_example;  // String | the location of the messages in the site/app, e.g. "PLP", "PDP", "cart" etc. (optional) 
+            var transparent = true;  // Boolean | If transparent is false (default), returns the input image with the social proof ovelayed, if no social proof values exist for the product a 301 redirect is returned. If transparent is true, returns a transparent image to the size of the input image with the social proof message, if no social proof values for the given product a 1x1px transparent image is returned. (optional) 
+
+            try
+            {
+                // returns an image containing the social proof for the product, Note use https://flockr-cdn.com as the host in production
+                byte[] result = apiInstance.image(apiKey, image, productId, visitorId, sessionId, host, location, transparent);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling ImageApi.image: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Image-image-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$api_instance = new Swagger\Client\ApiImageApi();
+$apiKey = apiKey_example; // String | your api key
+$image = image_example; // String | URL Encoded path to the image to add/overlay social proof messages
+$productId = productId_example; // String | the unique ID of the product, must be the same ID as used in product visit
+$visitorId = visitorId_example; // String | A unique id for the visitor
+$sessionId = sessionId_example; // String | A unique id for the session
+$host = host_example; // String | The host name or ip address
+$location = location_example; // String | the location of the messages in the site/app, e.g. "PLP", "PDP", "cart" etc.
+$transparent = true; // Boolean | If transparent is false (default), returns the input image with the social proof ovelayed, if no social proof values exist for the product a 301 redirect is returned. If transparent is true, returns a transparent image to the size of the input image with the social proof message, if no social proof values for the given product a 1x1px transparent image is returned.
+
+try {
+    $result = $api_instance->image($apiKey, $image, $productId, $visitorId, $sessionId, $host, $location, $transparent);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ImageApi->image: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Image-image-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::SwaggerClient::Configuration;
+use WWW::SwaggerClient::ImageApi;
+
+my $api_instance = WWW::SwaggerClient::ImageApi->new();
+my $apiKey = apiKey_example; # String | your api key
+my $image = image_example; # String | URL Encoded path to the image to add/overlay social proof messages
+my $productId = productId_example; # String | the unique ID of the product, must be the same ID as used in product visit
+my $visitorId = visitorId_example; # String | A unique id for the visitor
+my $sessionId = sessionId_example; # String | A unique id for the session
+my $host = host_example; # String | The host name or ip address
+my $location = location_example; # String | the location of the messages in the site/app, e.g. "PLP", "PDP", "cart" etc.
+my $transparent = true; # Boolean | If transparent is false (default), returns the input image with the social proof ovelayed, if no social proof values exist for the product a 301 redirect is returned. If transparent is true, returns a transparent image to the size of the input image with the social proof message, if no social proof values for the given product a 1x1px transparent image is returned.
+
+eval { 
+    my $result = $api_instance->image(apiKey => $apiKey, image => $image, productId => $productId, visitorId => $visitorId, sessionId => $sessionId, host => $host, location => $location, transparent => $transparent);
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling ImageApi->image: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Image-image-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.ImageApi()
+apiKey = apiKey_example # String | your api key
+image = image_example # String | URL Encoded path to the image to add/overlay social proof messages
+productId = productId_example # String | the unique ID of the product, must be the same ID as used in product visit
+visitorId = visitorId_example # String | A unique id for the visitor
+sessionId = sessionId_example # String | A unique id for the session
+host = host_example # String | The host name or ip address (optional)
+location = location_example # String | the location of the messages in the site/app, e.g. "PLP", "PDP", "cart" etc. (optional)
+transparent = true # Boolean | If transparent is false (default), returns the input image with the social proof ovelayed, if no social proof values exist for the product a 301 redirect is returned. If transparent is true, returns a transparent image to the size of the input image with the social proof message, if no social proof values for the given product a 1x1px transparent image is returned. (optional)
+
+try: 
+    # returns an image containing the social proof for the product, Note use https://flockr-cdn.com as the host in production
+    api_response = api_instance.image(apiKey, image, productId, visitorId, sessionId, host=host, location=location, transparent=transparent)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling ImageApi->image: %s\n" % e)</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Parameters</h2>
+
+                            <div class="methodsubtabletitle">Path parameters</div>
+                            <table id="methodsubtable">
+                                <tr>
+                                  <th width="150px">Name</th>
+                                  <th>Description</th>
+                                </tr>
+                                  <tr><td style="width:150px;">apiKey*</td>
+                                  <td>
+                                  
+                                  
+                                      <div id="d2e199_image_apiKey">
+                                          <div class="json-schema-view">
+                                              <div class="primitive">
+                                                  <span class="type">
+                                                      String
+                                                  </span>
+                                  
+                                                      <div class="inner description">
+                                                          your api key
+                                                      </div>
+                                              </div>
+                                                  <div class="inner required">
+                                                      Required
+                                                  </div>
+                                          </div>
+                                      </div>
+                                  </td>
+                                  </tr>
+                            </table>
+
+
+
+
+                            <div class="methodsubtabletitle">Query parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">host</td>
+                                <td>
+                                
+                                
+                                    <div id="d2e199_image_host">
+                                        <div class="json-schema-view">
+                                            <div class="primitive">
+                                                <span class="type">
+                                                    String
+                                                </span>
+                                
+                                                    <div class="inner description">
+                                                        The host name or ip address
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                </tr>
+                                <tr><td style="width:150px;">image*</td>
+                                <td>
+                                
+                                
+                                    <div id="d2e199_image_image">
+                                        <div class="json-schema-view">
+                                            <div class="primitive">
+                                                <span class="type">
+                                                    String
+                                                </span>
+                                
+                                                    <div class="inner description">
+                                                        URL Encoded path to the image to add/overlay social proof messages
+                                                    </div>
+                                            </div>
+                                                <div class="inner required">
+                                                    Required
+                                                </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                </tr>
+                                <tr><td style="width:150px;">productId*</td>
+                                <td>
+                                
+                                
+                                    <div id="d2e199_image_productId">
+                                        <div class="json-schema-view">
+                                            <div class="primitive">
+                                                <span class="type">
+                                                    String
+                                                </span>
+                                
+                                                    <div class="inner description">
+                                                        the unique ID of the product, must be the same ID as used in product visit
+                                                    </div>
+                                            </div>
+                                                <div class="inner required">
+                                                    Required
+                                                </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                </tr>
+                                <tr><td style="width:150px;">visitorId*</td>
+                                <td>
+                                
+                                
+                                    <div id="d2e199_image_visitorId">
+                                        <div class="json-schema-view">
+                                            <div class="primitive">
+                                                <span class="type">
+                                                    String
+                                                </span>
+                                
+                                                    <div class="inner description">
+                                                        A unique id for the visitor
+                                                    </div>
+                                            </div>
+                                                <div class="inner required">
+                                                    Required
+                                                </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                </tr>
+                                <tr><td style="width:150px;">sessionId*</td>
+                                <td>
+                                
+                                
+                                    <div id="d2e199_image_sessionId">
+                                        <div class="json-schema-view">
+                                            <div class="primitive">
+                                                <span class="type">
+                                                    String
+                                                </span>
+                                
+                                                    <div class="inner description">
+                                                        A unique id for the session
+                                                    </div>
+                                            </div>
+                                                <div class="inner required">
+                                                    Required
+                                                </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                </tr>
+                                <tr><td style="width:150px;">location</td>
+                                <td>
+                                
+                                
+                                    <div id="d2e199_image_location">
+                                        <div class="json-schema-view">
+                                            <div class="primitive">
+                                                <span class="type">
+                                                    String
+                                                </span>
+                                
+                                                    <div class="inner description">
+                                                        the location of the messages in the site/app, e.g. &quot;PLP&quot;, &quot;PDP&quot;, &quot;cart&quot; etc.
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                </tr>
+                                <tr><td style="width:150px;">transparent</td>
+                                <td>
+                                
+                                
+                                    <div id="d2e199_image_transparent">
+                                        <div class="json-schema-view">
+                                            <div class="primitive">
+                                                <span class="type">
+                                                    Boolean
+                                                </span>
+                                
+                                                    <div class="inner description">
+                                                        If transparent is false (default), returns the input image with the social proof ovelayed, if no social proof values exist for the product a 301 redirect is returned. If transparent is true, returns a transparent image to the size of the input image with the social proof message, if no social proof values for the given product a 1x1px transparent image is returned.
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                </tr>
+                            </table>
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - the input image with social proof added or a transparent image that is the same size of the input image with the social proof applied. Note use https://flockr-cdn.com as the host in production </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-image-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-image-200-schema">
+                                  <div id='responses-image-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "the input image with social proof added or a transparent image that is the same size of the input image with the social proof applied. Note use https://flockr-cdn.com as the host in production",
+  "content" : {
+    "image/webp" : {
+      "schema" : {
+        "type" : "string",
+        "format" : "binary",
+        "x-content-type" : "image/webp"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["image/webp"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-image-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-image-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-image-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
 
