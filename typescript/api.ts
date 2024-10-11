@@ -215,6 +215,12 @@ export interface List extends Request {
      * @memberof List
      */
     recommendations?: Array<string>;
+    /**
+     * Anoptional map of productIds to image URL, if supplied Flockr will return an image URL for the social proof alon with the social proof values
+     * @type {{ [key: string]: string; }}
+     * @memberof List
+     */
+    images?: { [key: string]: string; };
 }
 /**
  * 
@@ -234,6 +240,12 @@ export interface ListOnly extends Request {
      * @memberof ListOnly
      */
     products: Array<string>;
+    /**
+     * Anoptional map of productIds to image URL, if supplied Flockr will return an image URL for the social proof alon with the social proof values
+     * @type {{ [key: string]: string; }}
+     * @memberof ListOnly
+     */
+    images?: { [key: string]: string; };
 }
 /**
  * 
@@ -512,7 +524,7 @@ export interface ProductProduct {
      */
     displayPriceUnitPlural?: string;
     /**
-     * A url of the product image
+     * A url of the product image, if supplied Flockr will respond with an image URL that can be used to display the social proof message as an image
      * @type {string}
      * @memberof ProductProduct
      */
@@ -670,6 +682,12 @@ export interface SocialProof {
     messages?: Array<Message>;
     /**
      * 
+     * @type {string}
+     * @memberof SocialProof
+     */
+    image?: string;
+    /**
+     * 
      * @type {SocialProofProduct}
      * @memberof SocialProof
      */
@@ -732,10 +750,11 @@ export const CartApiFetchParamCreator = function (configuration?: Configuration)
          * @param {string} apiKey your api key
          * @param {string} [flockrDemo] append this parameter with the value \&quot;true\&quot; to return demo data for testing
          * @param {string} [flockrFakeData] append this value to return demo data of a specific proof type
+         * @param {boolean} [transparent] if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        cartDrawer(body: ListOnly, apiKey: string, flockrDemo?: string, flockrFakeData?: string, options: any = {}): FetchArgs {
+        cartDrawer(body: ListOnly, apiKey: string, flockrDemo?: string, flockrFakeData?: string, transparent?: boolean, options: any = {}): FetchArgs {
             // verify required parameter 'body' is not null or undefined
             if (body === null || body === undefined) {
                 throw new RequiredError('body','Required parameter body was null or undefined when calling cartDrawer.');
@@ -757,6 +776,10 @@ export const CartApiFetchParamCreator = function (configuration?: Configuration)
 
             if (flockrFakeData !== undefined) {
                 localVarQueryParameter['flockrFakeData'] = flockrFakeData;
+            }
+
+            if (transparent !== undefined) {
+                localVarQueryParameter['transparent'] = transparent;
             }
 
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -789,11 +812,12 @@ export const CartApiFp = function(configuration?: Configuration) {
          * @param {string} apiKey your api key
          * @param {string} [flockrDemo] append this parameter with the value \&quot;true\&quot; to return demo data for testing
          * @param {string} [flockrFakeData] append this value to return demo data of a specific proof type
+         * @param {boolean} [transparent] if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        cartDrawer(body: ListOnly, apiKey: string, flockrDemo?: string, flockrFakeData?: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Flockr> {
-            const localVarFetchArgs = CartApiFetchParamCreator(configuration).cartDrawer(body, apiKey, flockrDemo, flockrFakeData, options);
+        cartDrawer(body: ListOnly, apiKey: string, flockrDemo?: string, flockrFakeData?: string, transparent?: boolean, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Flockr> {
+            const localVarFetchArgs = CartApiFetchParamCreator(configuration).cartDrawer(body, apiKey, flockrDemo, flockrFakeData, transparent, options);
             return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
@@ -820,11 +844,12 @@ export const CartApiFactory = function (configuration?: Configuration, fetch?: F
          * @param {string} apiKey your api key
          * @param {string} [flockrDemo] append this parameter with the value \&quot;true\&quot; to return demo data for testing
          * @param {string} [flockrFakeData] append this value to return demo data of a specific proof type
+         * @param {boolean} [transparent] if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        cartDrawer(body: ListOnly, apiKey: string, flockrDemo?: string, flockrFakeData?: string, options?: any) {
-            return CartApiFp(configuration).cartDrawer(body, apiKey, flockrDemo, flockrFakeData, options)(fetch, basePath);
+        cartDrawer(body: ListOnly, apiKey: string, flockrDemo?: string, flockrFakeData?: string, transparent?: boolean, options?: any) {
+            return CartApiFp(configuration).cartDrawer(body, apiKey, flockrDemo, flockrFakeData, transparent, options)(fetch, basePath);
         },
     };
 };
@@ -843,12 +868,13 @@ export class CartApi extends BaseAPI {
      * @param {string} apiKey your api key
      * @param {string} [flockrDemo] append this parameter with the value \&quot;true\&quot; to return demo data for testing
      * @param {string} [flockrFakeData] append this value to return demo data of a specific proof type
+     * @param {boolean} [transparent] if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof CartApi
      */
-    public cartDrawer(body: ListOnly, apiKey: string, flockrDemo?: string, flockrFakeData?: string, options?: any) {
-        return CartApiFp(this.configuration).cartDrawer(body, apiKey, flockrDemo, flockrFakeData, options)(this.fetch, this.basePath);
+    public cartDrawer(body: ListOnly, apiKey: string, flockrDemo?: string, flockrFakeData?: string, transparent?: boolean, options?: any) {
+        return CartApiFp(this.configuration).cartDrawer(body, apiKey, flockrDemo, flockrFakeData, transparent, options)(this.fetch, this.basePath);
     }
 
 }
@@ -1292,10 +1318,11 @@ export const ListApiFetchParamCreator = function (configuration?: Configuration)
          * @param {string} apiKey your api key
          * @param {string} [flockrDemo] append this parameter with the value \&quot;true\&quot; to return demo data for testing
          * @param {string} [flockrFakeData] append this value to return demo data of a specific proof type
+         * @param {boolean} [transparent] if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        cartDrawer(body: ListOnly, apiKey: string, flockrDemo?: string, flockrFakeData?: string, options: any = {}): FetchArgs {
+        cartDrawer(body: ListOnly, apiKey: string, flockrDemo?: string, flockrFakeData?: string, transparent?: boolean, options: any = {}): FetchArgs {
             // verify required parameter 'body' is not null or undefined
             if (body === null || body === undefined) {
                 throw new RequiredError('body','Required parameter body was null or undefined when calling cartDrawer.');
@@ -1319,6 +1346,10 @@ export const ListApiFetchParamCreator = function (configuration?: Configuration)
                 localVarQueryParameter['flockrFakeData'] = flockrFakeData;
             }
 
+            if (transparent !== undefined) {
+                localVarQueryParameter['transparent'] = transparent;
+            }
+
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
@@ -1340,10 +1371,11 @@ export const ListApiFetchParamCreator = function (configuration?: Configuration)
          * @param {string} apiKey your api key
          * @param {string} [flockrDemo] append this parameter with the value \&quot;true\&quot; to return demo data for testing
          * @param {string} [flockrFakeData] append this value to return demo data of a specific proof type
+         * @param {boolean} [transparent] if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        samplesList(body: ListOnly, apiKey: string, flockrDemo?: string, flockrFakeData?: string, options: any = {}): FetchArgs {
+        samplesList(body: ListOnly, apiKey: string, flockrDemo?: string, flockrFakeData?: string, transparent?: boolean, options: any = {}): FetchArgs {
             // verify required parameter 'body' is not null or undefined
             if (body === null || body === undefined) {
                 throw new RequiredError('body','Required parameter body was null or undefined when calling samplesList.');
@@ -1365,6 +1397,10 @@ export const ListApiFetchParamCreator = function (configuration?: Configuration)
 
             if (flockrFakeData !== undefined) {
                 localVarQueryParameter['flockrFakeData'] = flockrFakeData;
+            }
+
+            if (transparent !== undefined) {
+                localVarQueryParameter['transparent'] = transparent;
             }
 
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -1397,11 +1433,12 @@ export const ListApiFp = function(configuration?: Configuration) {
          * @param {string} apiKey your api key
          * @param {string} [flockrDemo] append this parameter with the value \&quot;true\&quot; to return demo data for testing
          * @param {string} [flockrFakeData] append this value to return demo data of a specific proof type
+         * @param {boolean} [transparent] if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        cartDrawer(body: ListOnly, apiKey: string, flockrDemo?: string, flockrFakeData?: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Flockr> {
-            const localVarFetchArgs = ListApiFetchParamCreator(configuration).cartDrawer(body, apiKey, flockrDemo, flockrFakeData, options);
+        cartDrawer(body: ListOnly, apiKey: string, flockrDemo?: string, flockrFakeData?: string, transparent?: boolean, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Flockr> {
+            const localVarFetchArgs = ListApiFetchParamCreator(configuration).cartDrawer(body, apiKey, flockrDemo, flockrFakeData, transparent, options);
             return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
@@ -1419,11 +1456,12 @@ export const ListApiFp = function(configuration?: Configuration) {
          * @param {string} apiKey your api key
          * @param {string} [flockrDemo] append this parameter with the value \&quot;true\&quot; to return demo data for testing
          * @param {string} [flockrFakeData] append this value to return demo data of a specific proof type
+         * @param {boolean} [transparent] if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        samplesList(body: ListOnly, apiKey: string, flockrDemo?: string, flockrFakeData?: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Flockr> {
-            const localVarFetchArgs = ListApiFetchParamCreator(configuration).samplesList(body, apiKey, flockrDemo, flockrFakeData, options);
+        samplesList(body: ListOnly, apiKey: string, flockrDemo?: string, flockrFakeData?: string, transparent?: boolean, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Flockr> {
+            const localVarFetchArgs = ListApiFetchParamCreator(configuration).samplesList(body, apiKey, flockrDemo, flockrFakeData, transparent, options);
             return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
@@ -1450,11 +1488,12 @@ export const ListApiFactory = function (configuration?: Configuration, fetch?: F
          * @param {string} apiKey your api key
          * @param {string} [flockrDemo] append this parameter with the value \&quot;true\&quot; to return demo data for testing
          * @param {string} [flockrFakeData] append this value to return demo data of a specific proof type
+         * @param {boolean} [transparent] if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        cartDrawer(body: ListOnly, apiKey: string, flockrDemo?: string, flockrFakeData?: string, options?: any) {
-            return ListApiFp(configuration).cartDrawer(body, apiKey, flockrDemo, flockrFakeData, options)(fetch, basePath);
+        cartDrawer(body: ListOnly, apiKey: string, flockrDemo?: string, flockrFakeData?: string, transparent?: boolean, options?: any) {
+            return ListApiFp(configuration).cartDrawer(body, apiKey, flockrDemo, flockrFakeData, transparent, options)(fetch, basePath);
         },
         /**
          * Returns a list of Social Proof values for the products provided 
@@ -1463,11 +1502,12 @@ export const ListApiFactory = function (configuration?: Configuration, fetch?: F
          * @param {string} apiKey your api key
          * @param {string} [flockrDemo] append this parameter with the value \&quot;true\&quot; to return demo data for testing
          * @param {string} [flockrFakeData] append this value to return demo data of a specific proof type
+         * @param {boolean} [transparent] if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        samplesList(body: ListOnly, apiKey: string, flockrDemo?: string, flockrFakeData?: string, options?: any) {
-            return ListApiFp(configuration).samplesList(body, apiKey, flockrDemo, flockrFakeData, options)(fetch, basePath);
+        samplesList(body: ListOnly, apiKey: string, flockrDemo?: string, flockrFakeData?: string, transparent?: boolean, options?: any) {
+            return ListApiFp(configuration).samplesList(body, apiKey, flockrDemo, flockrFakeData, transparent, options)(fetch, basePath);
         },
     };
 };
@@ -1486,12 +1526,13 @@ export class ListApi extends BaseAPI {
      * @param {string} apiKey your api key
      * @param {string} [flockrDemo] append this parameter with the value \&quot;true\&quot; to return demo data for testing
      * @param {string} [flockrFakeData] append this value to return demo data of a specific proof type
+     * @param {boolean} [transparent] if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ListApi
      */
-    public cartDrawer(body: ListOnly, apiKey: string, flockrDemo?: string, flockrFakeData?: string, options?: any) {
-        return ListApiFp(this.configuration).cartDrawer(body, apiKey, flockrDemo, flockrFakeData, options)(this.fetch, this.basePath);
+    public cartDrawer(body: ListOnly, apiKey: string, flockrDemo?: string, flockrFakeData?: string, transparent?: boolean, options?: any) {
+        return ListApiFp(this.configuration).cartDrawer(body, apiKey, flockrDemo, flockrFakeData, transparent, options)(this.fetch, this.basePath);
     }
 
     /**
@@ -1501,12 +1542,13 @@ export class ListApi extends BaseAPI {
      * @param {string} apiKey your api key
      * @param {string} [flockrDemo] append this parameter with the value \&quot;true\&quot; to return demo data for testing
      * @param {string} [flockrFakeData] append this value to return demo data of a specific proof type
+     * @param {boolean} [transparent] if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ListApi
      */
-    public samplesList(body: ListOnly, apiKey: string, flockrDemo?: string, flockrFakeData?: string, options?: any) {
-        return ListApiFp(this.configuration).samplesList(body, apiKey, flockrDemo, flockrFakeData, options)(this.fetch, this.basePath);
+    public samplesList(body: ListOnly, apiKey: string, flockrDemo?: string, flockrFakeData?: string, transparent?: boolean, options?: any) {
+        return ListApiFp(this.configuration).samplesList(body, apiKey, flockrDemo, flockrFakeData, transparent, options)(this.fetch, this.basePath);
     }
 
 }
@@ -1523,10 +1565,11 @@ export const PredictiveSearchApiFetchParamCreator = function (configuration?: Co
          * @param {string} apiKey your api key
          * @param {string} [flockrDemo] append this parameter with the value \&quot;true\&quot; to return demo data for testing
          * @param {string} [flockrFakeData] append this value to return demo data of a specific proof type
+         * @param {boolean} [transparent] if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        predictiveSearch(body: Array, apiKey: string, flockrDemo?: string, flockrFakeData?: string, options: any = {}): FetchArgs {
+        predictiveSearch(body: Array, apiKey: string, flockrDemo?: string, flockrFakeData?: string, transparent?: boolean, options: any = {}): FetchArgs {
             // verify required parameter 'body' is not null or undefined
             if (body === null || body === undefined) {
                 throw new RequiredError('body','Required parameter body was null or undefined when calling predictiveSearch.');
@@ -1548,6 +1591,10 @@ export const PredictiveSearchApiFetchParamCreator = function (configuration?: Co
 
             if (flockrFakeData !== undefined) {
                 localVarQueryParameter['flockrFakeData'] = flockrFakeData;
+            }
+
+            if (transparent !== undefined) {
+                localVarQueryParameter['transparent'] = transparent;
             }
 
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -1580,11 +1627,12 @@ export const PredictiveSearchApiFp = function(configuration?: Configuration) {
          * @param {string} apiKey your api key
          * @param {string} [flockrDemo] append this parameter with the value \&quot;true\&quot; to return demo data for testing
          * @param {string} [flockrFakeData] append this value to return demo data of a specific proof type
+         * @param {boolean} [transparent] if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        predictiveSearch(body: Array, apiKey: string, flockrDemo?: string, flockrFakeData?: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Flockr> {
-            const localVarFetchArgs = PredictiveSearchApiFetchParamCreator(configuration).predictiveSearch(body, apiKey, flockrDemo, flockrFakeData, options);
+        predictiveSearch(body: Array, apiKey: string, flockrDemo?: string, flockrFakeData?: string, transparent?: boolean, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Flockr> {
+            const localVarFetchArgs = PredictiveSearchApiFetchParamCreator(configuration).predictiveSearch(body, apiKey, flockrDemo, flockrFakeData, transparent, options);
             return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
@@ -1611,11 +1659,12 @@ export const PredictiveSearchApiFactory = function (configuration?: Configuratio
          * @param {string} apiKey your api key
          * @param {string} [flockrDemo] append this parameter with the value \&quot;true\&quot; to return demo data for testing
          * @param {string} [flockrFakeData] append this value to return demo data of a specific proof type
+         * @param {boolean} [transparent] if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        predictiveSearch(body: Array, apiKey: string, flockrDemo?: string, flockrFakeData?: string, options?: any) {
-            return PredictiveSearchApiFp(configuration).predictiveSearch(body, apiKey, flockrDemo, flockrFakeData, options)(fetch, basePath);
+        predictiveSearch(body: Array, apiKey: string, flockrDemo?: string, flockrFakeData?: string, transparent?: boolean, options?: any) {
+            return PredictiveSearchApiFp(configuration).predictiveSearch(body, apiKey, flockrDemo, flockrFakeData, transparent, options)(fetch, basePath);
         },
     };
 };
@@ -1634,12 +1683,13 @@ export class PredictiveSearchApi extends BaseAPI {
      * @param {string} apiKey your api key
      * @param {string} [flockrDemo] append this parameter with the value \&quot;true\&quot; to return demo data for testing
      * @param {string} [flockrFakeData] append this value to return demo data of a specific proof type
+     * @param {boolean} [transparent] if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PredictiveSearchApi
      */
-    public predictiveSearch(body: Array, apiKey: string, flockrDemo?: string, flockrFakeData?: string, options?: any) {
-        return PredictiveSearchApiFp(this.configuration).predictiveSearch(body, apiKey, flockrDemo, flockrFakeData, options)(this.fetch, this.basePath);
+    public predictiveSearch(body: Array, apiKey: string, flockrDemo?: string, flockrFakeData?: string, transparent?: boolean, options?: any) {
+        return PredictiveSearchApiFp(this.configuration).predictiveSearch(body, apiKey, flockrDemo, flockrFakeData, transparent, options)(this.fetch, this.basePath);
     }
 
 }
@@ -1656,10 +1706,11 @@ export const ProductDetailsApiFetchParamCreator = function (configuration?: Conf
          * @param {string} apiKey your api key
          * @param {string} [flockrDemo] append this parameter with the value \&quot;true\&quot; to return demo data for testing
          * @param {string} [flockrFakeData] append this value to return demo data of a specific proof type
+         * @param {boolean} [transparent] if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        productVisit(body: Product, apiKey: string, flockrDemo?: string, flockrFakeData?: string, options: any = {}): FetchArgs {
+        productVisit(body: Product, apiKey: string, flockrDemo?: string, flockrFakeData?: string, transparent?: boolean, options: any = {}): FetchArgs {
             // verify required parameter 'body' is not null or undefined
             if (body === null || body === undefined) {
                 throw new RequiredError('body','Required parameter body was null or undefined when calling productVisit.');
@@ -1681,6 +1732,10 @@ export const ProductDetailsApiFetchParamCreator = function (configuration?: Conf
 
             if (flockrFakeData !== undefined) {
                 localVarQueryParameter['flockrFakeData'] = flockrFakeData;
+            }
+
+            if (transparent !== undefined) {
+                localVarQueryParameter['transparent'] = transparent;
             }
 
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -1713,11 +1768,12 @@ export const ProductDetailsApiFp = function(configuration?: Configuration) {
          * @param {string} apiKey your api key
          * @param {string} [flockrDemo] append this parameter with the value \&quot;true\&quot; to return demo data for testing
          * @param {string} [flockrFakeData] append this value to return demo data of a specific proof type
+         * @param {boolean} [transparent] if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        productVisit(body: Product, apiKey: string, flockrDemo?: string, flockrFakeData?: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Flockr> {
-            const localVarFetchArgs = ProductDetailsApiFetchParamCreator(configuration).productVisit(body, apiKey, flockrDemo, flockrFakeData, options);
+        productVisit(body: Product, apiKey: string, flockrDemo?: string, flockrFakeData?: string, transparent?: boolean, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Flockr> {
+            const localVarFetchArgs = ProductDetailsApiFetchParamCreator(configuration).productVisit(body, apiKey, flockrDemo, flockrFakeData, transparent, options);
             return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
@@ -1744,11 +1800,12 @@ export const ProductDetailsApiFactory = function (configuration?: Configuration,
          * @param {string} apiKey your api key
          * @param {string} [flockrDemo] append this parameter with the value \&quot;true\&quot; to return demo data for testing
          * @param {string} [flockrFakeData] append this value to return demo data of a specific proof type
+         * @param {boolean} [transparent] if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        productVisit(body: Product, apiKey: string, flockrDemo?: string, flockrFakeData?: string, options?: any) {
-            return ProductDetailsApiFp(configuration).productVisit(body, apiKey, flockrDemo, flockrFakeData, options)(fetch, basePath);
+        productVisit(body: Product, apiKey: string, flockrDemo?: string, flockrFakeData?: string, transparent?: boolean, options?: any) {
+            return ProductDetailsApiFp(configuration).productVisit(body, apiKey, flockrDemo, flockrFakeData, transparent, options)(fetch, basePath);
         },
     };
 };
@@ -1767,12 +1824,13 @@ export class ProductDetailsApi extends BaseAPI {
      * @param {string} apiKey your api key
      * @param {string} [flockrDemo] append this parameter with the value \&quot;true\&quot; to return demo data for testing
      * @param {string} [flockrFakeData] append this value to return demo data of a specific proof type
+     * @param {boolean} [transparent] if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProductDetailsApi
      */
-    public productVisit(body: Product, apiKey: string, flockrDemo?: string, flockrFakeData?: string, options?: any) {
-        return ProductDetailsApiFp(this.configuration).productVisit(body, apiKey, flockrDemo, flockrFakeData, options)(this.fetch, this.basePath);
+    public productVisit(body: Product, apiKey: string, flockrDemo?: string, flockrFakeData?: string, transparent?: boolean, options?: any) {
+        return ProductDetailsApiFp(this.configuration).productVisit(body, apiKey, flockrDemo, flockrFakeData, transparent, options)(this.fetch, this.basePath);
     }
 
 }
@@ -1789,10 +1847,11 @@ export const ProductListApiFetchParamCreator = function (configuration?: Configu
          * @param {string} apiKey your api key
          * @param {string} [flockrDemo] append this parameter with the value \&quot;true\&quot; to return demo data for testing
          * @param {string} [flockrFakeData] append this value to return demo data of a specific proof type
+         * @param {boolean} [transparent] if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        categoryVisit(body: Array, apiKey: string, flockrDemo?: string, flockrFakeData?: string, options: any = {}): FetchArgs {
+        categoryVisit(body: Array, apiKey: string, flockrDemo?: string, flockrFakeData?: string, transparent?: boolean, options: any = {}): FetchArgs {
             // verify required parameter 'body' is not null or undefined
             if (body === null || body === undefined) {
                 throw new RequiredError('body','Required parameter body was null or undefined when calling categoryVisit.');
@@ -1814,6 +1873,10 @@ export const ProductListApiFetchParamCreator = function (configuration?: Configu
 
             if (flockrFakeData !== undefined) {
                 localVarQueryParameter['flockrFakeData'] = flockrFakeData;
+            }
+
+            if (transparent !== undefined) {
+                localVarQueryParameter['transparent'] = transparent;
             }
 
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -1846,11 +1909,12 @@ export const ProductListApiFp = function(configuration?: Configuration) {
          * @param {string} apiKey your api key
          * @param {string} [flockrDemo] append this parameter with the value \&quot;true\&quot; to return demo data for testing
          * @param {string} [flockrFakeData] append this value to return demo data of a specific proof type
+         * @param {boolean} [transparent] if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        categoryVisit(body: Array, apiKey: string, flockrDemo?: string, flockrFakeData?: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Flockr> {
-            const localVarFetchArgs = ProductListApiFetchParamCreator(configuration).categoryVisit(body, apiKey, flockrDemo, flockrFakeData, options);
+        categoryVisit(body: Array, apiKey: string, flockrDemo?: string, flockrFakeData?: string, transparent?: boolean, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Flockr> {
+            const localVarFetchArgs = ProductListApiFetchParamCreator(configuration).categoryVisit(body, apiKey, flockrDemo, flockrFakeData, transparent, options);
             return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
@@ -1877,11 +1941,12 @@ export const ProductListApiFactory = function (configuration?: Configuration, fe
          * @param {string} apiKey your api key
          * @param {string} [flockrDemo] append this parameter with the value \&quot;true\&quot; to return demo data for testing
          * @param {string} [flockrFakeData] append this value to return demo data of a specific proof type
+         * @param {boolean} [transparent] if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        categoryVisit(body: Array, apiKey: string, flockrDemo?: string, flockrFakeData?: string, options?: any) {
-            return ProductListApiFp(configuration).categoryVisit(body, apiKey, flockrDemo, flockrFakeData, options)(fetch, basePath);
+        categoryVisit(body: Array, apiKey: string, flockrDemo?: string, flockrFakeData?: string, transparent?: boolean, options?: any) {
+            return ProductListApiFp(configuration).categoryVisit(body, apiKey, flockrDemo, flockrFakeData, transparent, options)(fetch, basePath);
         },
     };
 };
@@ -1900,12 +1965,13 @@ export class ProductListApi extends BaseAPI {
      * @param {string} apiKey your api key
      * @param {string} [flockrDemo] append this parameter with the value \&quot;true\&quot; to return demo data for testing
      * @param {string} [flockrFakeData] append this value to return demo data of a specific proof type
+     * @param {boolean} [transparent] if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProductListApi
      */
-    public categoryVisit(body: Array, apiKey: string, flockrDemo?: string, flockrFakeData?: string, options?: any) {
-        return ProductListApiFp(this.configuration).categoryVisit(body, apiKey, flockrDemo, flockrFakeData, options)(this.fetch, this.basePath);
+    public categoryVisit(body: Array, apiKey: string, flockrDemo?: string, flockrFakeData?: string, transparent?: boolean, options?: any) {
+        return ProductListApiFp(this.configuration).categoryVisit(body, apiKey, flockrDemo, flockrFakeData, transparent, options)(this.fetch, this.basePath);
     }
 
 }
@@ -2055,10 +2121,11 @@ export const SamplesApiFetchParamCreator = function (configuration?: Configurati
          * @param {string} apiKey your api key
          * @param {string} [flockrDemo] append this parameter with the value \&quot;true\&quot; to return demo data for testing
          * @param {string} [flockrFakeData] append this value to return demo data of a specific proof type
+         * @param {boolean} [transparent] if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        samplesList(body: ListOnly, apiKey: string, flockrDemo?: string, flockrFakeData?: string, options: any = {}): FetchArgs {
+        samplesList(body: ListOnly, apiKey: string, flockrDemo?: string, flockrFakeData?: string, transparent?: boolean, options: any = {}): FetchArgs {
             // verify required parameter 'body' is not null or undefined
             if (body === null || body === undefined) {
                 throw new RequiredError('body','Required parameter body was null or undefined when calling samplesList.');
@@ -2080,6 +2147,10 @@ export const SamplesApiFetchParamCreator = function (configuration?: Configurati
 
             if (flockrFakeData !== undefined) {
                 localVarQueryParameter['flockrFakeData'] = flockrFakeData;
+            }
+
+            if (transparent !== undefined) {
+                localVarQueryParameter['transparent'] = transparent;
             }
 
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -2112,11 +2183,12 @@ export const SamplesApiFp = function(configuration?: Configuration) {
          * @param {string} apiKey your api key
          * @param {string} [flockrDemo] append this parameter with the value \&quot;true\&quot; to return demo data for testing
          * @param {string} [flockrFakeData] append this value to return demo data of a specific proof type
+         * @param {boolean} [transparent] if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        samplesList(body: ListOnly, apiKey: string, flockrDemo?: string, flockrFakeData?: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Flockr> {
-            const localVarFetchArgs = SamplesApiFetchParamCreator(configuration).samplesList(body, apiKey, flockrDemo, flockrFakeData, options);
+        samplesList(body: ListOnly, apiKey: string, flockrDemo?: string, flockrFakeData?: string, transparent?: boolean, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Flockr> {
+            const localVarFetchArgs = SamplesApiFetchParamCreator(configuration).samplesList(body, apiKey, flockrDemo, flockrFakeData, transparent, options);
             return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
@@ -2143,11 +2215,12 @@ export const SamplesApiFactory = function (configuration?: Configuration, fetch?
          * @param {string} apiKey your api key
          * @param {string} [flockrDemo] append this parameter with the value \&quot;true\&quot; to return demo data for testing
          * @param {string} [flockrFakeData] append this value to return demo data of a specific proof type
+         * @param {boolean} [transparent] if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        samplesList(body: ListOnly, apiKey: string, flockrDemo?: string, flockrFakeData?: string, options?: any) {
-            return SamplesApiFp(configuration).samplesList(body, apiKey, flockrDemo, flockrFakeData, options)(fetch, basePath);
+        samplesList(body: ListOnly, apiKey: string, flockrDemo?: string, flockrFakeData?: string, transparent?: boolean, options?: any) {
+            return SamplesApiFp(configuration).samplesList(body, apiKey, flockrDemo, flockrFakeData, transparent, options)(fetch, basePath);
         },
     };
 };
@@ -2166,12 +2239,13 @@ export class SamplesApi extends BaseAPI {
      * @param {string} apiKey your api key
      * @param {string} [flockrDemo] append this parameter with the value \&quot;true\&quot; to return demo data for testing
      * @param {string} [flockrFakeData] append this value to return demo data of a specific proof type
+     * @param {boolean} [transparent] if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SamplesApi
      */
-    public samplesList(body: ListOnly, apiKey: string, flockrDemo?: string, flockrFakeData?: string, options?: any) {
-        return SamplesApiFp(this.configuration).samplesList(body, apiKey, flockrDemo, flockrFakeData, options)(this.fetch, this.basePath);
+    public samplesList(body: ListOnly, apiKey: string, flockrDemo?: string, flockrFakeData?: string, transparent?: boolean, options?: any) {
+        return SamplesApiFp(this.configuration).samplesList(body, apiKey, flockrDemo, flockrFakeData, transparent, options)(this.fetch, this.basePath);
     }
 
 }

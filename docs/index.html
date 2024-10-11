@@ -805,6 +805,16 @@
         "items" : {
           "type" : "string"
         }
+      },
+      "images" : {
+        "type" : "object",
+        "additionalProperties" : {
+          "type" : "string"
+        },
+        "description" : "Anoptional map of productIds to image URL, if supplied Flockr will return an image URL for the social proof alon with the social proof values",
+        "example" : {
+          "1725" : "https://www.toppstiles.co.uk/static/media/catalog/product/c/a/634119_metro-white-tile_7.jpg"
+        }
       }
     }
   } ]
@@ -827,6 +837,16 @@
         "example" : [ "1725", "8647", "1750", "9325" ],
         "items" : {
           "type" : "string"
+        }
+      },
+      "images" : {
+        "type" : "object",
+        "additionalProperties" : {
+          "type" : "string"
+        },
+        "description" : "Anoptional map of productIds to image URL, if supplied Flockr will return an image URL for the social proof alon with the social proof values",
+        "example" : {
+          "1725" : "https://www.toppstiles.co.uk/static/media/catalog/product/c/a/634119_metro-white-tile_7.jpg"
         }
       }
     }
@@ -994,7 +1014,7 @@
     },
     "image" : {
       "type" : "string",
-      "description" : "A url of the product image",
+      "description" : "A url of the product image, if supplied Flockr will respond with an image URL that can be used to display the social proof message as an image",
       "example" : "https://www.toppstiles.co.uk/static/media/catalog/product/c/a/634119_metro-white-tile_7.jpg"
     },
     "name" : {
@@ -1114,6 +1134,10 @@
       "items" : {
         "$ref" : "#/components/schemas/message"
       }
+    },
+    "image" : {
+      "type" : "string",
+      "example" : "https://flockr-cdn.com/api/v2/key/{apiKey}/image?host=app&image=https%3A%2F%2Fwww.toppstiles.co.uk%2Fstatic%2Fmedia%2Fcatalog%2Fproduct%2Fc%2Fa%2F634119_metro-white-tile_7.jpg&productId=1725&visitorId=51102fbc-525c-41a2-b4e1-1606e19f3f88&sessionId=5e537d75-72ff-47df-a581-d5f0d0316062&transparent=false"
     },
     "product" : {
       "$ref" : "#/components/schemas/socialProof_product"
@@ -1265,7 +1289,7 @@
                            <pre class="prettyprint"><code class="language-bsh">curl -X POST\
 -H "Accept: application/json"\
 -H "Content-Type: application/json"\
-"https://virtserver.swaggerhub.com/Flockr_AI/Flockr/1.0.0/{apiKey}/cartDrawer/visit?flockrDemo=&flockrFakeData="</code></pre>
+"https://virtserver.swaggerhub.com/Flockr_AI/Flockr/1.0.0/{apiKey}/cartDrawer/visit?flockrDemo=&flockrFakeData=&transparent="</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Cart-cartDrawer-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -1287,8 +1311,9 @@ public class CartApiExample {
         String apiKey = apiKey_example; // String | your api key
         String flockrDemo = flockrDemo_example; // String | append this parameter with the value "true" to return demo data for testing
         String flockrFakeData = flockrFakeData_example; // String | append this value to return demo data of a specific proof type
+        Boolean transparent = true; // Boolean | if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
         try {
-            flockr result = apiInstance.cartDrawer(body, apiKey, flockrDemo, flockrFakeData);
+            flockr result = apiInstance.cartDrawer(body, apiKey, flockrDemo, flockrFakeData, transparent);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling CartApi#cartDrawer");
@@ -1311,8 +1336,9 @@ public class CartApiExample {
         String apiKey = apiKey_example; // String | your api key
         String flockrDemo = flockrDemo_example; // String | append this parameter with the value "true" to return demo data for testing
         String flockrFakeData = flockrFakeData_example; // String | append this value to return demo data of a specific proof type
+        Boolean transparent = true; // Boolean | if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
         try {
-            flockr result = apiInstance.cartDrawer(body, apiKey, flockrDemo, flockrFakeData);
+            flockr result = apiInstance.cartDrawer(body, apiKey, flockrDemo, flockrFakeData, transparent);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling CartApi#cartDrawer");
@@ -1332,6 +1358,7 @@ public class CartApiExample {
 String *apiKey = apiKey_example; // your api key
 String *flockrDemo = flockrDemo_example; // append this parameter with the value "true" to return demo data for testing (optional)
 String *flockrFakeData = flockrFakeData_example; // append this value to return demo data of a specific proof type (optional)
+Boolean *transparent = true; // if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied (optional)
 
 CartApi *apiInstance = [[CartApi alloc] init];
 
@@ -1340,6 +1367,7 @@ CartApi *apiInstance = [[CartApi alloc] init];
     apiKey:apiKey
     flockrDemo:flockrDemo
     flockrFakeData:flockrFakeData
+    transparent:transparent
               completionHandler: ^(flockr output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
@@ -1362,6 +1390,7 @@ var apiKey = apiKey_example; // {{String}} your api key
 var opts = { 
   'flockrDemo': flockrDemo_example // {{String}} append this parameter with the value "true" to return demo data for testing
   'flockrFakeData': flockrFakeData_example // {{String}} append this value to return demo data of a specific proof type
+  'transparent': true // {{Boolean}} if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
 };
 var callback = function(error, data, response) {
   if (error) {
@@ -1396,11 +1425,12 @@ namespace Example
             var apiKey = apiKey_example;  // String | your api key
             var flockrDemo = flockrDemo_example;  // String | append this parameter with the value "true" to return demo data for testing (optional) 
             var flockrFakeData = flockrFakeData_example;  // String | append this value to return demo data of a specific proof type (optional) 
+            var transparent = true;  // Boolean | if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied (optional) 
 
             try
             {
                 // Fetches a set of proofs for the provided product IDs. Flockr will decide which products to return proofs for
-                flockr result = apiInstance.cartDrawer(body, apiKey, flockrDemo, flockrFakeData);
+                flockr result = apiInstance.cartDrawer(body, apiKey, flockrDemo, flockrFakeData, transparent);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -1424,9 +1454,10 @@ $body = {
 $apiKey = apiKey_example; // String | your api key
 $flockrDemo = flockrDemo_example; // String | append this parameter with the value "true" to return demo data for testing
 $flockrFakeData = flockrFakeData_example; // String | append this value to return demo data of a specific proof type
+$transparent = true; // Boolean | if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
 
 try {
-    $result = $api_instance->cartDrawer($body, $apiKey, $flockrDemo, $flockrFakeData);
+    $result = $api_instance->cartDrawer($body, $apiKey, $flockrDemo, $flockrFakeData, $transparent);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling CartApi->cartDrawer: ', $e->getMessage(), PHP_EOL;
@@ -1444,9 +1475,10 @@ my $body = WWW::SwaggerClient::Object::ListOnly->new(); # ListOnly | An array of
 my $apiKey = apiKey_example; # String | your api key
 my $flockrDemo = flockrDemo_example; # String | append this parameter with the value "true" to return demo data for testing
 my $flockrFakeData = flockrFakeData_example; # String | append this value to return demo data of a specific proof type
+my $transparent = true; # Boolean | if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
 
 eval { 
-    my $result = $api_instance->cartDrawer(body => $body, apiKey => $apiKey, flockrDemo => $flockrDemo, flockrFakeData => $flockrFakeData);
+    my $result = $api_instance->cartDrawer(body => $body, apiKey => $apiKey, flockrDemo => $flockrDemo, flockrFakeData => $flockrFakeData, transparent => $transparent);
     print Dumper($result);
 };
 if ($@) {
@@ -1469,10 +1501,11 @@ body = {
 apiKey = apiKey_example # String | your api key
 flockrDemo = flockrDemo_example # String | append this parameter with the value "true" to return demo data for testing (optional)
 flockrFakeData = flockrFakeData_example # String | append this value to return demo data of a specific proof type (optional)
+transparent = true # Boolean | if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied (optional)
 
 try: 
     # Fetches a set of proofs for the provided product IDs. Flockr will decide which products to return proofs for
-    api_response = api_instance.cart_drawer(body, apiKey, flockrDemo=flockrDemo, flockrFakeData=flockrFakeData)
+    api_response = api_instance.cart_drawer(body, apiKey, flockrDemo=flockrDemo, flockrFakeData=flockrFakeData, transparent=transparent)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling CartApi->cartDrawer: %s\n" % e)</code></pre>
@@ -1601,6 +1634,25 @@ except ApiException as e:
                                 
                                                     <div class="inner description">
                                                         append this value to return demo data of a specific proof type
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                </tr>
+                                <tr><td style="width:150px;">transparent</td>
+                                <td>
+                                
+                                
+                                    <div id="d2e199_cartDrawer_transparent">
+                                        <div class="json-schema-view">
+                                            <div class="primitive">
+                                                <span class="type">
+                                                    Boolean
+                                                </span>
+                                
+                                                    <div class="inner description">
+                                                        if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
                                                     </div>
                                             </div>
                                         </div>
@@ -3201,7 +3253,7 @@ except ApiException as e:
                            <pre class="prettyprint"><code class="language-bsh">curl -X POST\
 -H "Accept: application/json"\
 -H "Content-Type: application/json"\
-"https://virtserver.swaggerhub.com/Flockr_AI/Flockr/1.0.0/{apiKey}/cartDrawer/visit?flockrDemo=&flockrFakeData="</code></pre>
+"https://virtserver.swaggerhub.com/Flockr_AI/Flockr/1.0.0/{apiKey}/cartDrawer/visit?flockrDemo=&flockrFakeData=&transparent="</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-List-cartDrawer-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -3223,8 +3275,9 @@ public class ListApiExample {
         String apiKey = apiKey_example; // String | your api key
         String flockrDemo = flockrDemo_example; // String | append this parameter with the value "true" to return demo data for testing
         String flockrFakeData = flockrFakeData_example; // String | append this value to return demo data of a specific proof type
+        Boolean transparent = true; // Boolean | if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
         try {
-            flockr result = apiInstance.cartDrawer(body, apiKey, flockrDemo, flockrFakeData);
+            flockr result = apiInstance.cartDrawer(body, apiKey, flockrDemo, flockrFakeData, transparent);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling ListApi#cartDrawer");
@@ -3247,8 +3300,9 @@ public class ListApiExample {
         String apiKey = apiKey_example; // String | your api key
         String flockrDemo = flockrDemo_example; // String | append this parameter with the value "true" to return demo data for testing
         String flockrFakeData = flockrFakeData_example; // String | append this value to return demo data of a specific proof type
+        Boolean transparent = true; // Boolean | if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
         try {
-            flockr result = apiInstance.cartDrawer(body, apiKey, flockrDemo, flockrFakeData);
+            flockr result = apiInstance.cartDrawer(body, apiKey, flockrDemo, flockrFakeData, transparent);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling ListApi#cartDrawer");
@@ -3268,6 +3322,7 @@ public class ListApiExample {
 String *apiKey = apiKey_example; // your api key
 String *flockrDemo = flockrDemo_example; // append this parameter with the value "true" to return demo data for testing (optional)
 String *flockrFakeData = flockrFakeData_example; // append this value to return demo data of a specific proof type (optional)
+Boolean *transparent = true; // if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied (optional)
 
 ListApi *apiInstance = [[ListApi alloc] init];
 
@@ -3276,6 +3331,7 @@ ListApi *apiInstance = [[ListApi alloc] init];
     apiKey:apiKey
     flockrDemo:flockrDemo
     flockrFakeData:flockrFakeData
+    transparent:transparent
               completionHandler: ^(flockr output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
@@ -3298,6 +3354,7 @@ var apiKey = apiKey_example; // {{String}} your api key
 var opts = { 
   'flockrDemo': flockrDemo_example // {{String}} append this parameter with the value "true" to return demo data for testing
   'flockrFakeData': flockrFakeData_example // {{String}} append this value to return demo data of a specific proof type
+  'transparent': true // {{Boolean}} if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
 };
 var callback = function(error, data, response) {
   if (error) {
@@ -3332,11 +3389,12 @@ namespace Example
             var apiKey = apiKey_example;  // String | your api key
             var flockrDemo = flockrDemo_example;  // String | append this parameter with the value "true" to return demo data for testing (optional) 
             var flockrFakeData = flockrFakeData_example;  // String | append this value to return demo data of a specific proof type (optional) 
+            var transparent = true;  // Boolean | if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied (optional) 
 
             try
             {
                 // Fetches a set of proofs for the provided product IDs. Flockr will decide which products to return proofs for
-                flockr result = apiInstance.cartDrawer(body, apiKey, flockrDemo, flockrFakeData);
+                flockr result = apiInstance.cartDrawer(body, apiKey, flockrDemo, flockrFakeData, transparent);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -3360,9 +3418,10 @@ $body = {
 $apiKey = apiKey_example; // String | your api key
 $flockrDemo = flockrDemo_example; // String | append this parameter with the value "true" to return demo data for testing
 $flockrFakeData = flockrFakeData_example; // String | append this value to return demo data of a specific proof type
+$transparent = true; // Boolean | if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
 
 try {
-    $result = $api_instance->cartDrawer($body, $apiKey, $flockrDemo, $flockrFakeData);
+    $result = $api_instance->cartDrawer($body, $apiKey, $flockrDemo, $flockrFakeData, $transparent);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling ListApi->cartDrawer: ', $e->getMessage(), PHP_EOL;
@@ -3380,9 +3439,10 @@ my $body = WWW::SwaggerClient::Object::ListOnly->new(); # ListOnly | An array of
 my $apiKey = apiKey_example; # String | your api key
 my $flockrDemo = flockrDemo_example; # String | append this parameter with the value "true" to return demo data for testing
 my $flockrFakeData = flockrFakeData_example; # String | append this value to return demo data of a specific proof type
+my $transparent = true; # Boolean | if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
 
 eval { 
-    my $result = $api_instance->cartDrawer(body => $body, apiKey => $apiKey, flockrDemo => $flockrDemo, flockrFakeData => $flockrFakeData);
+    my $result = $api_instance->cartDrawer(body => $body, apiKey => $apiKey, flockrDemo => $flockrDemo, flockrFakeData => $flockrFakeData, transparent => $transparent);
     print Dumper($result);
 };
 if ($@) {
@@ -3405,10 +3465,11 @@ body = {
 apiKey = apiKey_example # String | your api key
 flockrDemo = flockrDemo_example # String | append this parameter with the value "true" to return demo data for testing (optional)
 flockrFakeData = flockrFakeData_example # String | append this value to return demo data of a specific proof type (optional)
+transparent = true # Boolean | if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied (optional)
 
 try: 
     # Fetches a set of proofs for the provided product IDs. Flockr will decide which products to return proofs for
-    api_response = api_instance.cart_drawer(body, apiKey, flockrDemo=flockrDemo, flockrFakeData=flockrFakeData)
+    api_response = api_instance.cart_drawer(body, apiKey, flockrDemo=flockrDemo, flockrFakeData=flockrFakeData, transparent=transparent)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling ListApi->cartDrawer: %s\n" % e)</code></pre>
@@ -3537,6 +3598,25 @@ except ApiException as e:
                                 
                                                     <div class="inner description">
                                                         append this value to return demo data of a specific proof type
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                </tr>
+                                <tr><td style="width:150px;">transparent</td>
+                                <td>
+                                
+                                
+                                    <div id="d2e199_cartDrawer_transparent">
+                                        <div class="json-schema-view">
+                                            <div class="primitive">
+                                                <span class="type">
+                                                    Boolean
+                                                </span>
+                                
+                                                    <div class="inner description">
+                                                        if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
                                                     </div>
                                             </div>
                                         </div>
@@ -3677,7 +3757,7 @@ except ApiException as e:
                            <pre class="prettyprint"><code class="language-bsh">curl -X POST\
 -H "Accept: application/json"\
 -H "Content-Type: application/json"\
-"https://virtserver.swaggerhub.com/Flockr_AI/Flockr/1.0.0/{apiKey}/samplesList/visit?flockrDemo=&flockrFakeData="</code></pre>
+"https://virtserver.swaggerhub.com/Flockr_AI/Flockr/1.0.0/{apiKey}/samplesList/visit?flockrDemo=&flockrFakeData=&transparent="</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-List-samplesList-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -3699,8 +3779,9 @@ public class ListApiExample {
         String apiKey = apiKey_example; // String | your api key
         String flockrDemo = flockrDemo_example; // String | append this parameter with the value "true" to return demo data for testing
         String flockrFakeData = flockrFakeData_example; // String | append this value to return demo data of a specific proof type
+        Boolean transparent = true; // Boolean | if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
         try {
-            flockr result = apiInstance.samplesList(body, apiKey, flockrDemo, flockrFakeData);
+            flockr result = apiInstance.samplesList(body, apiKey, flockrDemo, flockrFakeData, transparent);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling ListApi#samplesList");
@@ -3723,8 +3804,9 @@ public class ListApiExample {
         String apiKey = apiKey_example; // String | your api key
         String flockrDemo = flockrDemo_example; // String | append this parameter with the value "true" to return demo data for testing
         String flockrFakeData = flockrFakeData_example; // String | append this value to return demo data of a specific proof type
+        Boolean transparent = true; // Boolean | if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
         try {
-            flockr result = apiInstance.samplesList(body, apiKey, flockrDemo, flockrFakeData);
+            flockr result = apiInstance.samplesList(body, apiKey, flockrDemo, flockrFakeData, transparent);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling ListApi#samplesList");
@@ -3744,6 +3826,7 @@ public class ListApiExample {
 String *apiKey = apiKey_example; // your api key
 String *flockrDemo = flockrDemo_example; // append this parameter with the value "true" to return demo data for testing (optional)
 String *flockrFakeData = flockrFakeData_example; // append this value to return demo data of a specific proof type (optional)
+Boolean *transparent = true; // if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied (optional)
 
 ListApi *apiInstance = [[ListApi alloc] init];
 
@@ -3752,6 +3835,7 @@ ListApi *apiInstance = [[ListApi alloc] init];
     apiKey:apiKey
     flockrDemo:flockrDemo
     flockrFakeData:flockrFakeData
+    transparent:transparent
               completionHandler: ^(flockr output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
@@ -3774,6 +3858,7 @@ var apiKey = apiKey_example; // {{String}} your api key
 var opts = { 
   'flockrDemo': flockrDemo_example // {{String}} append this parameter with the value "true" to return demo data for testing
   'flockrFakeData': flockrFakeData_example // {{String}} append this value to return demo data of a specific proof type
+  'transparent': true // {{Boolean}} if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
 };
 var callback = function(error, data, response) {
   if (error) {
@@ -3808,11 +3893,12 @@ namespace Example
             var apiKey = apiKey_example;  // String | your api key
             var flockrDemo = flockrDemo_example;  // String | append this parameter with the value "true" to return demo data for testing (optional) 
             var flockrFakeData = flockrFakeData_example;  // String | append this value to return demo data of a specific proof type (optional) 
+            var transparent = true;  // Boolean | if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied (optional) 
 
             try
             {
                 // Fetches a set of proofs for the provided product IDs based on sample interactions, e.g, number of samples for a given product ordered. Flockr will decide which products to return proofs for
-                flockr result = apiInstance.samplesList(body, apiKey, flockrDemo, flockrFakeData);
+                flockr result = apiInstance.samplesList(body, apiKey, flockrDemo, flockrFakeData, transparent);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -3836,9 +3922,10 @@ $body = {
 $apiKey = apiKey_example; // String | your api key
 $flockrDemo = flockrDemo_example; // String | append this parameter with the value "true" to return demo data for testing
 $flockrFakeData = flockrFakeData_example; // String | append this value to return demo data of a specific proof type
+$transparent = true; // Boolean | if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
 
 try {
-    $result = $api_instance->samplesList($body, $apiKey, $flockrDemo, $flockrFakeData);
+    $result = $api_instance->samplesList($body, $apiKey, $flockrDemo, $flockrFakeData, $transparent);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling ListApi->samplesList: ', $e->getMessage(), PHP_EOL;
@@ -3856,9 +3943,10 @@ my $body = WWW::SwaggerClient::Object::ListOnly->new(); # ListOnly | An array of
 my $apiKey = apiKey_example; # String | your api key
 my $flockrDemo = flockrDemo_example; # String | append this parameter with the value "true" to return demo data for testing
 my $flockrFakeData = flockrFakeData_example; # String | append this value to return demo data of a specific proof type
+my $transparent = true; # Boolean | if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
 
 eval { 
-    my $result = $api_instance->samplesList(body => $body, apiKey => $apiKey, flockrDemo => $flockrDemo, flockrFakeData => $flockrFakeData);
+    my $result = $api_instance->samplesList(body => $body, apiKey => $apiKey, flockrDemo => $flockrDemo, flockrFakeData => $flockrFakeData, transparent => $transparent);
     print Dumper($result);
 };
 if ($@) {
@@ -3881,10 +3969,11 @@ body = {
 apiKey = apiKey_example # String | your api key
 flockrDemo = flockrDemo_example # String | append this parameter with the value "true" to return demo data for testing (optional)
 flockrFakeData = flockrFakeData_example # String | append this value to return demo data of a specific proof type (optional)
+transparent = true # Boolean | if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied (optional)
 
 try: 
     # Fetches a set of proofs for the provided product IDs based on sample interactions, e.g, number of samples for a given product ordered. Flockr will decide which products to return proofs for
-    api_response = api_instance.samples_list(body, apiKey, flockrDemo=flockrDemo, flockrFakeData=flockrFakeData)
+    api_response = api_instance.samples_list(body, apiKey, flockrDemo=flockrDemo, flockrFakeData=flockrFakeData, transparent=transparent)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling ListApi->samplesList: %s\n" % e)</code></pre>
@@ -4019,6 +4108,25 @@ except ApiException as e:
                                     </div>
                                 </td>
                                 </tr>
+                                <tr><td style="width:150px;">transparent</td>
+                                <td>
+                                
+                                
+                                    <div id="d2e199_samplesList_transparent">
+                                        <div class="json-schema-view">
+                                            <div class="primitive">
+                                                <span class="type">
+                                                    Boolean
+                                                </span>
+                                
+                                                    <div class="inner description">
+                                                        if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                </tr>
                             </table>
 
                           <h2>Responses</h2>
@@ -4140,7 +4248,7 @@ except ApiException as e:
                            <pre class="prettyprint"><code class="language-bsh">curl -X POST\
 -H "Accept: application/json"\
 -H "Content-Type: application/json"\
-"https://virtserver.swaggerhub.com/Flockr_AI/Flockr/1.0.0/{apiKey}/predictiveSearch/visit?flockrDemo=&flockrFakeData="</code></pre>
+"https://virtserver.swaggerhub.com/Flockr_AI/Flockr/1.0.0/{apiKey}/predictiveSearch/visit?flockrDemo=&flockrFakeData=&transparent="</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-PredictiveSearch-predictiveSearch-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -4179,8 +4287,9 @@ public class PredictiveSearchApiExample {
         String apiKey = apiKey_example; // String | your api key
         String flockrDemo = flockrDemo_example; // String | append this parameter with the value "true" to return demo data for testing
         String flockrFakeData = flockrFakeData_example; // String | append this value to return demo data of a specific proof type
+        Boolean transparent = true; // Boolean | if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
         try {
-            flockr result = apiInstance.predictiveSearch(body, apiKey, flockrDemo, flockrFakeData);
+            flockr result = apiInstance.predictiveSearch(body, apiKey, flockrDemo, flockrFakeData, transparent);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling PredictiveSearchApi#predictiveSearch");
@@ -4220,8 +4329,9 @@ public class PredictiveSearchApiExample {
         String apiKey = apiKey_example; // String | your api key
         String flockrDemo = flockrDemo_example; // String | append this parameter with the value "true" to return demo data for testing
         String flockrFakeData = flockrFakeData_example; // String | append this value to return demo data of a specific proof type
+        Boolean transparent = true; // Boolean | if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
         try {
-            flockr result = apiInstance.predictiveSearch(body, apiKey, flockrDemo, flockrFakeData);
+            flockr result = apiInstance.predictiveSearch(body, apiKey, flockrDemo, flockrFakeData, transparent);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling PredictiveSearchApi#predictiveSearch");
@@ -4258,6 +4368,7 @@ public class PredictiveSearchApiExample {
 String *apiKey = apiKey_example; // your api key
 String *flockrDemo = flockrDemo_example; // append this parameter with the value "true" to return demo data for testing (optional)
 String *flockrFakeData = flockrFakeData_example; // append this value to return demo data of a specific proof type (optional)
+Boolean *transparent = true; // if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied (optional)
 
 PredictiveSearchApi *apiInstance = [[PredictiveSearchApi alloc] init];
 
@@ -4266,6 +4377,7 @@ PredictiveSearchApi *apiInstance = [[PredictiveSearchApi alloc] init];
     apiKey:apiKey
     flockrDemo:flockrDemo
     flockrFakeData:flockrFakeData
+    transparent:transparent
               completionHandler: ^(flockr output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
@@ -4305,6 +4417,7 @@ var apiKey = apiKey_example; // {{String}} your api key
 var opts = { 
   'flockrDemo': flockrDemo_example // {{String}} append this parameter with the value "true" to return demo data for testing
   'flockrFakeData': flockrFakeData_example // {{String}} append this value to return demo data of a specific proof type
+  'transparent': true // {{Boolean}} if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
 };
 var callback = function(error, data, response) {
   if (error) {
@@ -4339,11 +4452,12 @@ namespace Example
             var apiKey = apiKey_example;  // String | your api key
             var flockrDemo = flockrDemo_example;  // String | append this parameter with the value "true" to return demo data for testing (optional) 
             var flockrFakeData = flockrFakeData_example;  // String | append this value to return demo data of a specific proof type (optional) 
+            var transparent = true;  // Boolean | if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied (optional) 
 
             try
             {
                 // Fetches a set of proofs for the provided product IDs. Flockr will decide which products to return proofs for
-                flockr result = apiInstance.predictiveSearch(body, apiKey, flockrDemo, flockrFakeData);
+                flockr result = apiInstance.predictiveSearch(body, apiKey, flockrDemo, flockrFakeData, transparent);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -4384,9 +4498,10 @@ $body = {
 $apiKey = apiKey_example; // String | your api key
 $flockrDemo = flockrDemo_example; // String | append this parameter with the value "true" to return demo data for testing
 $flockrFakeData = flockrFakeData_example; // String | append this value to return demo data of a specific proof type
+$transparent = true; // Boolean | if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
 
 try {
-    $result = $api_instance->predictiveSearch($body, $apiKey, $flockrDemo, $flockrFakeData);
+    $result = $api_instance->predictiveSearch($body, $apiKey, $flockrDemo, $flockrFakeData, $transparent);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling PredictiveSearchApi->predictiveSearch: ', $e->getMessage(), PHP_EOL;
@@ -4404,9 +4519,10 @@ my $body = WWW::SwaggerClient::Object::List->new(); # List | An array of product
 my $apiKey = apiKey_example; # String | your api key
 my $flockrDemo = flockrDemo_example; # String | append this parameter with the value "true" to return demo data for testing
 my $flockrFakeData = flockrFakeData_example; # String | append this value to return demo data of a specific proof type
+my $transparent = true; # Boolean | if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
 
 eval { 
-    my $result = $api_instance->predictiveSearch(body => $body, apiKey => $apiKey, flockrDemo => $flockrDemo, flockrFakeData => $flockrFakeData);
+    my $result = $api_instance->predictiveSearch(body => $body, apiKey => $apiKey, flockrDemo => $flockrDemo, flockrFakeData => $flockrFakeData, transparent => $transparent);
     print Dumper($result);
 };
 if ($@) {
@@ -4446,10 +4562,11 @@ body = {
 apiKey = apiKey_example # String | your api key
 flockrDemo = flockrDemo_example # String | append this parameter with the value "true" to return demo data for testing (optional)
 flockrFakeData = flockrFakeData_example # String | append this value to return demo data of a specific proof type (optional)
+transparent = true # Boolean | if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied (optional)
 
 try: 
     # Fetches a set of proofs for the provided product IDs. Flockr will decide which products to return proofs for
-    api_response = api_instance.predictive_search(body, apiKey, flockrDemo=flockrDemo, flockrFakeData=flockrFakeData)
+    api_response = api_instance.predictive_search(body, apiKey, flockrDemo=flockrDemo, flockrFakeData=flockrFakeData, transparent=transparent)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling PredictiveSearchApi->predictiveSearch: %s\n" % e)</code></pre>
@@ -4625,6 +4742,25 @@ except ApiException as e:
                                     </div>
                                 </td>
                                 </tr>
+                                <tr><td style="width:150px;">transparent</td>
+                                <td>
+                                
+                                
+                                    <div id="d2e199_predictiveSearch_transparent">
+                                        <div class="json-schema-view">
+                                            <div class="primitive">
+                                                <span class="type">
+                                                    Boolean
+                                                </span>
+                                
+                                                    <div class="inner description">
+                                                        if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                </tr>
                             </table>
 
                           <h2>Responses</h2>
@@ -4725,7 +4861,7 @@ session. The social proof for that product is returned
                            <pre class="prettyprint"><code class="language-bsh">curl -X POST\
 -H "Accept: application/json"\
 -H "Content-Type: application/json"\
-"https://virtserver.swaggerhub.com/Flockr_AI/Flockr/1.0.0/{apiKey}/product/visit?flockrDemo=&flockrFakeData="</code></pre>
+"https://virtserver.swaggerhub.com/Flockr_AI/Flockr/1.0.0/{apiKey}/product/visit?flockrDemo=&flockrFakeData=&transparent="</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-ProductDetails-productVisit-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -4747,8 +4883,9 @@ public class ProductDetailsApiExample {
         String apiKey = apiKey_example; // String | your api key
         String flockrDemo = flockrDemo_example; // String | append this parameter with the value "true" to return demo data for testing
         String flockrFakeData = flockrFakeData_example; // String | append this value to return demo data of a specific proof type
+        Boolean transparent = true; // Boolean | if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
         try {
-            flockr result = apiInstance.productVisit(body, apiKey, flockrDemo, flockrFakeData);
+            flockr result = apiInstance.productVisit(body, apiKey, flockrDemo, flockrFakeData, transparent);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling ProductDetailsApi#productVisit");
@@ -4771,8 +4908,9 @@ public class ProductDetailsApiExample {
         String apiKey = apiKey_example; // String | your api key
         String flockrDemo = flockrDemo_example; // String | append this parameter with the value "true" to return demo data for testing
         String flockrFakeData = flockrFakeData_example; // String | append this value to return demo data of a specific proof type
+        Boolean transparent = true; // Boolean | if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
         try {
-            flockr result = apiInstance.productVisit(body, apiKey, flockrDemo, flockrFakeData);
+            flockr result = apiInstance.productVisit(body, apiKey, flockrDemo, flockrFakeData, transparent);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling ProductDetailsApi#productVisit");
@@ -4792,6 +4930,7 @@ public class ProductDetailsApiExample {
 String *apiKey = apiKey_example; // your api key
 String *flockrDemo = flockrDemo_example; // append this parameter with the value "true" to return demo data for testing (optional)
 String *flockrFakeData = flockrFakeData_example; // append this value to return demo data of a specific proof type (optional)
+Boolean *transparent = true; // if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied (optional)
 
 ProductDetailsApi *apiInstance = [[ProductDetailsApi alloc] init];
 
@@ -4800,6 +4939,7 @@ ProductDetailsApi *apiInstance = [[ProductDetailsApi alloc] init];
     apiKey:apiKey
     flockrDemo:flockrDemo
     flockrFakeData:flockrFakeData
+    transparent:transparent
               completionHandler: ^(flockr output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
@@ -4822,6 +4962,7 @@ var apiKey = apiKey_example; // {{String}} your api key
 var opts = { 
   'flockrDemo': flockrDemo_example // {{String}} append this parameter with the value "true" to return demo data for testing
   'flockrFakeData': flockrFakeData_example // {{String}} append this value to return demo data of a specific proof type
+  'transparent': true // {{Boolean}} if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
 };
 var callback = function(error, data, response) {
   if (error) {
@@ -4856,11 +4997,12 @@ namespace Example
             var apiKey = apiKey_example;  // String | your api key
             var flockrDemo = flockrDemo_example;  // String | append this parameter with the value "true" to return demo data for testing (optional) 
             var flockrFakeData = flockrFakeData_example;  // String | append this value to return demo data of a specific proof type (optional) 
+            var transparent = true;  // Boolean | if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied (optional) 
 
             try
             {
                 // saves a product visit and returns social proof
-                flockr result = apiInstance.productVisit(body, apiKey, flockrDemo, flockrFakeData);
+                flockr result = apiInstance.productVisit(body, apiKey, flockrDemo, flockrFakeData, transparent);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -4884,9 +5026,10 @@ $body = {
 $apiKey = apiKey_example; // String | your api key
 $flockrDemo = flockrDemo_example; // String | append this parameter with the value "true" to return demo data for testing
 $flockrFakeData = flockrFakeData_example; // String | append this value to return demo data of a specific proof type
+$transparent = true; // Boolean | if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
 
 try {
-    $result = $api_instance->productVisit($body, $apiKey, $flockrDemo, $flockrFakeData);
+    $result = $api_instance->productVisit($body, $apiKey, $flockrDemo, $flockrFakeData, $transparent);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling ProductDetailsApi->productVisit: ', $e->getMessage(), PHP_EOL;
@@ -4904,9 +5047,10 @@ my $body = WWW::SwaggerClient::Object::Product->new(); # Product | Details of th
 my $apiKey = apiKey_example; # String | your api key
 my $flockrDemo = flockrDemo_example; # String | append this parameter with the value "true" to return demo data for testing
 my $flockrFakeData = flockrFakeData_example; # String | append this value to return demo data of a specific proof type
+my $transparent = true; # Boolean | if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
 
 eval { 
-    my $result = $api_instance->productVisit(body => $body, apiKey => $apiKey, flockrDemo => $flockrDemo, flockrFakeData => $flockrFakeData);
+    my $result = $api_instance->productVisit(body => $body, apiKey => $apiKey, flockrDemo => $flockrDemo, flockrFakeData => $flockrFakeData, transparent => $transparent);
     print Dumper($result);
 };
 if ($@) {
@@ -4929,10 +5073,11 @@ body = {
 apiKey = apiKey_example # String | your api key
 flockrDemo = flockrDemo_example # String | append this parameter with the value "true" to return demo data for testing (optional)
 flockrFakeData = flockrFakeData_example # String | append this value to return demo data of a specific proof type (optional)
+transparent = true # Boolean | if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied (optional)
 
 try: 
     # saves a product visit and returns social proof
-    api_response = api_instance.product_visit(body, apiKey, flockrDemo=flockrDemo, flockrFakeData=flockrFakeData)
+    api_response = api_instance.product_visit(body, apiKey, flockrDemo=flockrDemo, flockrFakeData=flockrFakeData, transparent=transparent)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling ProductDetailsApi->productVisit: %s\n" % e)</code></pre>
@@ -5070,6 +5215,25 @@ except ApiException as e:
                                     </div>
                                 </td>
                                 </tr>
+                                <tr><td style="width:150px;">transparent</td>
+                                <td>
+                                
+                                
+                                    <div id="d2e199_productVisit_transparent">
+                                        <div class="json-schema-view">
+                                            <div class="primitive">
+                                                <span class="type">
+                                                    Boolean
+                                                </span>
+                                
+                                                    <div class="inner description">
+                                                        if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                </tr>
                             </table>
 
                           <h2>Responses</h2>
@@ -5102,6 +5266,7 @@ except ApiException as e:
           "product" : {
             "id" : "7515"
           },
+          "image" : "https://flockr-cdn.com/api/v2/key/{apiKey}/image?host=app&image=https%3A%2F%2Fwww.toppstiles.co.uk%2Fstatic%2Fmedia%2Fcatalog%2Fproduct%2Fc%2Fa%2F634119_metro-white-tile_7.jpg&productId=1725&visitorId=d7908b4e-7eab-4727-b92b-a54e8c0a2657&sessionId=723eb962-d288-4a4c-b507-fa39a94684d9&transparent=false",
           "messages" : [ {
             "code" : "CAP",
             "message" : "<div class=\"flockr-dt\"><strong>Popular choice!</strong>18 people are looking at this right now</div><div class=\"flockr-mb\"><strong>Popular!</strong>18 views</div>",
@@ -5207,7 +5372,7 @@ except ApiException as e:
                            <pre class="prettyprint"><code class="language-bsh">curl -X POST\
 -H "Accept: application/json"\
 -H "Content-Type: application/json"\
-"https://virtserver.swaggerhub.com/Flockr_AI/Flockr/1.0.0/{apiKey}/category/visit?flockrDemo=&flockrFakeData="</code></pre>
+"https://virtserver.swaggerhub.com/Flockr_AI/Flockr/1.0.0/{apiKey}/category/visit?flockrDemo=&flockrFakeData=&transparent="</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-ProductList-categoryVisit-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -5230,6 +5395,9 @@ public class ProductListApiExample {
       "sessionId" : "5e537d75-72ff-47df-a581-d5f0d0316062"
     },
     "products" : [ "1725", "6947", "1750", "9235", "1838", "1722", "9422", "9292", "10432", "9216", "10377", "9150", "10378", "7888", "10430", "1782", "1690", "8900", "1709", "6433", "10025", "10095", "4941", "9904" ],
+    "images" : {
+      "1725" : "https://www.toppstiles.co.uk/static/media/catalog/product/c/a/634119_metro-white-tile_7.jpg"
+    },
     "recommendations" : [ "7456", "7123" ],
     "category" : "Bathroom Tiles",
     "device" : {
@@ -5246,8 +5414,9 @@ public class ProductListApiExample {
         String apiKey = apiKey_example; // String | your api key
         String flockrDemo = flockrDemo_example; // String | append this parameter with the value "true" to return demo data for testing
         String flockrFakeData = flockrFakeData_example; // String | append this value to return demo data of a specific proof type
+        Boolean transparent = true; // Boolean | if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
         try {
-            flockr result = apiInstance.categoryVisit(body, apiKey, flockrDemo, flockrFakeData);
+            flockr result = apiInstance.categoryVisit(body, apiKey, flockrDemo, flockrFakeData, transparent);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling ProductListApi#categoryVisit");
@@ -5271,6 +5440,9 @@ public class ProductListApiExample {
       "sessionId" : "5e537d75-72ff-47df-a581-d5f0d0316062"
     },
     "products" : [ "1725", "6947", "1750", "9235", "1838", "1722", "9422", "9292", "10432", "9216", "10377", "9150", "10378", "7888", "10430", "1782", "1690", "8900", "1709", "6433", "10025", "10095", "4941", "9904" ],
+    "images" : {
+      "1725" : "https://www.toppstiles.co.uk/static/media/catalog/product/c/a/634119_metro-white-tile_7.jpg"
+    },
     "recommendations" : [ "7456", "7123" ],
     "category" : "Bathroom Tiles",
     "device" : {
@@ -5287,8 +5459,9 @@ public class ProductListApiExample {
         String apiKey = apiKey_example; // String | your api key
         String flockrDemo = flockrDemo_example; // String | append this parameter with the value "true" to return demo data for testing
         String flockrFakeData = flockrFakeData_example; // String | append this value to return demo data of a specific proof type
+        Boolean transparent = true; // Boolean | if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
         try {
-            flockr result = apiInstance.categoryVisit(body, apiKey, flockrDemo, flockrFakeData);
+            flockr result = apiInstance.categoryVisit(body, apiKey, flockrDemo, flockrFakeData, transparent);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling ProductListApi#categoryVisit");
@@ -5309,6 +5482,9 @@ public class ProductListApiExample {
       "sessionId" : "5e537d75-72ff-47df-a581-d5f0d0316062"
     },
     "products" : [ "1725", "6947", "1750", "9235", "1838", "1722", "9422", "9292", "10432", "9216", "10377", "9150", "10378", "7888", "10430", "1782", "1690", "8900", "1709", "6433", "10025", "10095", "4941", "9904" ],
+    "images" : {
+      "1725" : "https://www.toppstiles.co.uk/static/media/catalog/product/c/a/634119_metro-white-tile_7.jpg"
+    },
     "recommendations" : [ "7456", "7123" ],
     "category" : "Bathroom Tiles",
     "device" : {
@@ -5325,6 +5501,7 @@ public class ProductListApiExample {
 String *apiKey = apiKey_example; // your api key
 String *flockrDemo = flockrDemo_example; // append this parameter with the value "true" to return demo data for testing (optional)
 String *flockrFakeData = flockrFakeData_example; // append this value to return demo data of a specific proof type (optional)
+Boolean *transparent = true; // if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied (optional)
 
 ProductListApi *apiInstance = [[ProductListApi alloc] init];
 
@@ -5333,6 +5510,7 @@ ProductListApi *apiInstance = [[ProductListApi alloc] init];
     apiKey:apiKey
     flockrDemo:flockrDemo
     flockrFakeData:flockrFakeData
+    transparent:transparent
               completionHandler: ^(flockr output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
@@ -5355,6 +5533,9 @@ var body = {
       "sessionId" : "5e537d75-72ff-47df-a581-d5f0d0316062"
     },
     "products" : [ "1725", "6947", "1750", "9235", "1838", "1722", "9422", "9292", "10432", "9216", "10377", "9150", "10378", "7888", "10430", "1782", "1690", "8900", "1709", "6433", "10025", "10095", "4941", "9904" ],
+    "images" : {
+      "1725" : "https://www.toppstiles.co.uk/static/media/catalog/product/c/a/634119_metro-white-tile_7.jpg"
+    },
     "recommendations" : [ "7456", "7123" ],
     "category" : "Bathroom Tiles",
     "device" : {
@@ -5372,6 +5553,7 @@ var apiKey = apiKey_example; // {{String}} your api key
 var opts = { 
   'flockrDemo': flockrDemo_example // {{String}} append this parameter with the value "true" to return demo data for testing
   'flockrFakeData': flockrFakeData_example // {{String}} append this value to return demo data of a specific proof type
+  'transparent': true // {{Boolean}} if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
 };
 var callback = function(error, data, response) {
   if (error) {
@@ -5406,11 +5588,12 @@ namespace Example
             var apiKey = apiKey_example;  // String | your api key
             var flockrDemo = flockrDemo_example;  // String | append this parameter with the value "true" to return demo data for testing (optional) 
             var flockrFakeData = flockrFakeData_example;  // String | append this value to return demo data of a specific proof type (optional) 
+            var transparent = true;  // Boolean | if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied (optional) 
 
             try
             {
                 // Fetches a set of proofs for the provided product IDs. Flockr will decide which products to return proofs for
-                flockr result = apiInstance.categoryVisit(body, apiKey, flockrDemo, flockrFakeData);
+                flockr result = apiInstance.categoryVisit(body, apiKey, flockrDemo, flockrFakeData, transparent);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -5435,6 +5618,9 @@ $body = {
       "sessionId" : "5e537d75-72ff-47df-a581-d5f0d0316062"
     },
     "products" : [ "1725", "6947", "1750", "9235", "1838", "1722", "9422", "9292", "10432", "9216", "10377", "9150", "10378", "7888", "10430", "1782", "1690", "8900", "1709", "6433", "10025", "10095", "4941", "9904" ],
+    "images" : {
+      "1725" : "https://www.toppstiles.co.uk/static/media/catalog/product/c/a/634119_metro-white-tile_7.jpg"
+    },
     "recommendations" : [ "7456", "7123" ],
     "category" : "Bathroom Tiles",
     "device" : {
@@ -5451,9 +5637,10 @@ $body = {
 $apiKey = apiKey_example; // String | your api key
 $flockrDemo = flockrDemo_example; // String | append this parameter with the value "true" to return demo data for testing
 $flockrFakeData = flockrFakeData_example; // String | append this value to return demo data of a specific proof type
+$transparent = true; // Boolean | if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
 
 try {
-    $result = $api_instance->categoryVisit($body, $apiKey, $flockrDemo, $flockrFakeData);
+    $result = $api_instance->categoryVisit($body, $apiKey, $flockrDemo, $flockrFakeData, $transparent);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling ProductListApi->categoryVisit: ', $e->getMessage(), PHP_EOL;
@@ -5471,9 +5658,10 @@ my $body = WWW::SwaggerClient::Object::List->new(); # List | An array of product
 my $apiKey = apiKey_example; # String | your api key
 my $flockrDemo = flockrDemo_example; # String | append this parameter with the value "true" to return demo data for testing
 my $flockrFakeData = flockrFakeData_example; # String | append this value to return demo data of a specific proof type
+my $transparent = true; # Boolean | if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
 
 eval { 
-    my $result = $api_instance->categoryVisit(body => $body, apiKey => $apiKey, flockrDemo => $flockrDemo, flockrFakeData => $flockrFakeData);
+    my $result = $api_instance->categoryVisit(body => $body, apiKey => $apiKey, flockrDemo => $flockrDemo, flockrFakeData => $flockrFakeData, transparent => $transparent);
     print Dumper($result);
 };
 if ($@) {
@@ -5497,6 +5685,9 @@ body = {
       "sessionId" : "5e537d75-72ff-47df-a581-d5f0d0316062"
     },
     "products" : [ "1725", "6947", "1750", "9235", "1838", "1722", "9422", "9292", "10432", "9216", "10377", "9150", "10378", "7888", "10430", "1782", "1690", "8900", "1709", "6433", "10025", "10095", "4941", "9904" ],
+    "images" : {
+      "1725" : "https://www.toppstiles.co.uk/static/media/catalog/product/c/a/634119_metro-white-tile_7.jpg"
+    },
     "recommendations" : [ "7456", "7123" ],
     "category" : "Bathroom Tiles",
     "device" : {
@@ -5513,10 +5704,11 @@ body = {
 apiKey = apiKey_example # String | your api key
 flockrDemo = flockrDemo_example # String | append this parameter with the value "true" to return demo data for testing (optional)
 flockrFakeData = flockrFakeData_example # String | append this value to return demo data of a specific proof type (optional)
+transparent = true # Boolean | if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied (optional)
 
 try: 
     # Fetches a set of proofs for the provided product IDs. Flockr will decide which products to return proofs for
-    api_response = api_instance.category_visit(body, apiKey, flockrDemo=flockrDemo, flockrFakeData=flockrFakeData)
+    api_response = api_instance.category_visit(body, apiKey, flockrDemo=flockrDemo, flockrFakeData=flockrFakeData, transparent=transparent)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling ProductListApi->categoryVisit: %s\n" % e)</code></pre>
@@ -5583,6 +5775,9 @@ except ApiException as e:
               "sessionId" : "5e537d75-72ff-47df-a581-d5f0d0316062"
             },
             "products" : [ "1725", "6947", "1750", "9235", "1838", "1722", "9422", "9292", "10432", "9216", "10377", "9150", "10378", "7888", "10430", "1782", "1690", "8900", "1709", "6433", "10025", "10095", "4941", "9904" ],
+            "images" : {
+              "1725" : "https://www.toppstiles.co.uk/static/media/catalog/product/c/a/634119_metro-white-tile_7.jpg"
+            },
             "recommendations" : [ "7456", "7123" ],
             "category" : "Bathroom Tiles",
             "device" : {
@@ -5603,6 +5798,9 @@ except ApiException as e:
               "sessionId" : "5e537d75-72ff-47df-a581-d5f0d0316062"
             },
             "products" : [ "1725", "6947", "1750", "9235", "1838", "1722", "9422", "9292", "10432", "9216", "10377", "9150", "10378", "7888", "10430", "1782", "1690", "8900", "1709", "6433", "10025", "10095", "4941", "9904" ],
+            "images" : {
+              "1725" : "https://www.toppstiles.co.uk/static/media/catalog/product/c/a/634119_metro-white-tile_7.jpg"
+            },
             "recommendations" : [ "7456", "7123" ],
             "category" : "Bathroom Tiles",
             "device" : {
@@ -5686,6 +5884,25 @@ except ApiException as e:
                                 
                                                     <div class="inner description">
                                                         append this value to return demo data of a specific proof type
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                </tr>
+                                <tr><td style="width:150px;">transparent</td>
+                                <td>
+                                
+                                
+                                    <div id="d2e199_categoryVisit_transparent">
+                                        <div class="json-schema-view">
+                                            <div class="primitive">
+                                                <span class="type">
+                                                    Boolean
+                                                </span>
+                                
+                                                    <div class="inner description">
+                                                        if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
                                                     </div>
                                             </div>
                                         </div>
@@ -6269,7 +6486,7 @@ except ApiException as e:
                            <pre class="prettyprint"><code class="language-bsh">curl -X POST\
 -H "Accept: application/json"\
 -H "Content-Type: application/json"\
-"https://virtserver.swaggerhub.com/Flockr_AI/Flockr/1.0.0/{apiKey}/samplesList/visit?flockrDemo=&flockrFakeData="</code></pre>
+"https://virtserver.swaggerhub.com/Flockr_AI/Flockr/1.0.0/{apiKey}/samplesList/visit?flockrDemo=&flockrFakeData=&transparent="</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Samples-samplesList-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -6291,8 +6508,9 @@ public class SamplesApiExample {
         String apiKey = apiKey_example; // String | your api key
         String flockrDemo = flockrDemo_example; // String | append this parameter with the value "true" to return demo data for testing
         String flockrFakeData = flockrFakeData_example; // String | append this value to return demo data of a specific proof type
+        Boolean transparent = true; // Boolean | if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
         try {
-            flockr result = apiInstance.samplesList(body, apiKey, flockrDemo, flockrFakeData);
+            flockr result = apiInstance.samplesList(body, apiKey, flockrDemo, flockrFakeData, transparent);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling SamplesApi#samplesList");
@@ -6315,8 +6533,9 @@ public class SamplesApiExample {
         String apiKey = apiKey_example; // String | your api key
         String flockrDemo = flockrDemo_example; // String | append this parameter with the value "true" to return demo data for testing
         String flockrFakeData = flockrFakeData_example; // String | append this value to return demo data of a specific proof type
+        Boolean transparent = true; // Boolean | if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
         try {
-            flockr result = apiInstance.samplesList(body, apiKey, flockrDemo, flockrFakeData);
+            flockr result = apiInstance.samplesList(body, apiKey, flockrDemo, flockrFakeData, transparent);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling SamplesApi#samplesList");
@@ -6336,6 +6555,7 @@ public class SamplesApiExample {
 String *apiKey = apiKey_example; // your api key
 String *flockrDemo = flockrDemo_example; // append this parameter with the value "true" to return demo data for testing (optional)
 String *flockrFakeData = flockrFakeData_example; // append this value to return demo data of a specific proof type (optional)
+Boolean *transparent = true; // if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied (optional)
 
 SamplesApi *apiInstance = [[SamplesApi alloc] init];
 
@@ -6344,6 +6564,7 @@ SamplesApi *apiInstance = [[SamplesApi alloc] init];
     apiKey:apiKey
     flockrDemo:flockrDemo
     flockrFakeData:flockrFakeData
+    transparent:transparent
               completionHandler: ^(flockr output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
@@ -6366,6 +6587,7 @@ var apiKey = apiKey_example; // {{String}} your api key
 var opts = { 
   'flockrDemo': flockrDemo_example // {{String}} append this parameter with the value "true" to return demo data for testing
   'flockrFakeData': flockrFakeData_example // {{String}} append this value to return demo data of a specific proof type
+  'transparent': true // {{Boolean}} if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
 };
 var callback = function(error, data, response) {
   if (error) {
@@ -6400,11 +6622,12 @@ namespace Example
             var apiKey = apiKey_example;  // String | your api key
             var flockrDemo = flockrDemo_example;  // String | append this parameter with the value "true" to return demo data for testing (optional) 
             var flockrFakeData = flockrFakeData_example;  // String | append this value to return demo data of a specific proof type (optional) 
+            var transparent = true;  // Boolean | if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied (optional) 
 
             try
             {
                 // Fetches a set of proofs for the provided product IDs based on sample interactions, e.g, number of samples for a given product ordered. Flockr will decide which products to return proofs for
-                flockr result = apiInstance.samplesList(body, apiKey, flockrDemo, flockrFakeData);
+                flockr result = apiInstance.samplesList(body, apiKey, flockrDemo, flockrFakeData, transparent);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -6428,9 +6651,10 @@ $body = {
 $apiKey = apiKey_example; // String | your api key
 $flockrDemo = flockrDemo_example; // String | append this parameter with the value "true" to return demo data for testing
 $flockrFakeData = flockrFakeData_example; // String | append this value to return demo data of a specific proof type
+$transparent = true; // Boolean | if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
 
 try {
-    $result = $api_instance->samplesList($body, $apiKey, $flockrDemo, $flockrFakeData);
+    $result = $api_instance->samplesList($body, $apiKey, $flockrDemo, $flockrFakeData, $transparent);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling SamplesApi->samplesList: ', $e->getMessage(), PHP_EOL;
@@ -6448,9 +6672,10 @@ my $body = WWW::SwaggerClient::Object::ListOnly->new(); # ListOnly | An array of
 my $apiKey = apiKey_example; # String | your api key
 my $flockrDemo = flockrDemo_example; # String | append this parameter with the value "true" to return demo data for testing
 my $flockrFakeData = flockrFakeData_example; # String | append this value to return demo data of a specific proof type
+my $transparent = true; # Boolean | if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
 
 eval { 
-    my $result = $api_instance->samplesList(body => $body, apiKey => $apiKey, flockrDemo => $flockrDemo, flockrFakeData => $flockrFakeData);
+    my $result = $api_instance->samplesList(body => $body, apiKey => $apiKey, flockrDemo => $flockrDemo, flockrFakeData => $flockrFakeData, transparent => $transparent);
     print Dumper($result);
 };
 if ($@) {
@@ -6473,10 +6698,11 @@ body = {
 apiKey = apiKey_example # String | your api key
 flockrDemo = flockrDemo_example # String | append this parameter with the value "true" to return demo data for testing (optional)
 flockrFakeData = flockrFakeData_example # String | append this value to return demo data of a specific proof type (optional)
+transparent = true # Boolean | if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied (optional)
 
 try: 
     # Fetches a set of proofs for the provided product IDs based on sample interactions, e.g, number of samples for a given product ordered. Flockr will decide which products to return proofs for
-    api_response = api_instance.samples_list(body, apiKey, flockrDemo=flockrDemo, flockrFakeData=flockrFakeData)
+    api_response = api_instance.samples_list(body, apiKey, flockrDemo=flockrDemo, flockrFakeData=flockrFakeData, transparent=transparent)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling SamplesApi->samplesList: %s\n" % e)</code></pre>
@@ -6605,6 +6831,25 @@ except ApiException as e:
                                 
                                                     <div class="inner description">
                                                         append this value to return demo data of a specific proof type
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                </tr>
+                                <tr><td style="width:150px;">transparent</td>
+                                <td>
+                                
+                                
+                                    <div id="d2e199_samplesList_transparent">
+                                        <div class="json-schema-view">
+                                            <div class="primitive">
+                                                <span class="type">
+                                                    Boolean
+                                                </span>
+                                
+                                                    <div class="inner description">
+                                                        if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
                                                     </div>
                                             </div>
                                         </div>

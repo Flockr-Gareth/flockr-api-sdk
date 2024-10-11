@@ -75,7 +75,8 @@ var body = new FlockrSocialProofApi.ListOnly(); // {ListOnly} An array of produc
 var apiKey = "apiKey_example"; // {String} your api key
 var opts = { 
   'flockrDemo': "flockrDemo_example", // {String} append this parameter with the value \"true\" to return demo data for testing
-  'flockrFakeData': "flockrFakeData_example" // {String} append this value to return demo data of a specific proof type
+  'flockrFakeData': "flockrFakeData_example", // {String} append this value to return demo data of a specific proof type
+  'transparent': true // {Boolean} if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
 };
 var callback = function(error, data, response) {
   if (error) {

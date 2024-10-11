@@ -45,7 +45,8 @@ public class ProductListApiTest {
         String apiKey = null;
         String flockrDemo = null;
         String flockrFakeData = null;
-        Flockr response = api.categoryVisit(body, apiKey, flockrDemo, flockrFakeData);
+        Boolean transparent = null;
+        Flockr response = api.categoryVisit(body, apiKey, flockrDemo, flockrFakeData, transparent);
 
         // TODO: test validations
     }

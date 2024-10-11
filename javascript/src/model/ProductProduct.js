@@ -89,7 +89,7 @@ ProductProduct.prototype.category = undefined;
 ProductProduct.prototype.displayPriceUnitPlural = undefined;
 
 /**
- * A url of the product image
+ * A url of the product image, if supplied Flockr will respond with an image URL that can be used to display the social proof message as an image
  * @member {String} image
  */
 ProductProduct.prototype.image = undefined;

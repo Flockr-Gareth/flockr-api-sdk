@@ -46,6 +46,12 @@
         // expect(instance.messages).to.be(expectedValueLiteral);
       });
 
+      it('should have the property image (base name: "image")', function() {
+        // TODO: update the code to test the property image
+        expect(instance).to.have.property('image');
+        // expect(instance.image).to.be(expectedValueLiteral);
+      });
+
       it('should have the property product (base name: "product")', function() {
         // TODO: update the code to test the property product
         expect(instance).to.have.property('product');

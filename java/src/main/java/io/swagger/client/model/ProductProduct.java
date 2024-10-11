@@ -27,7 +27,7 @@ import java.util.List;
  * ProductProduct
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2024-10-10T17:35:19.331632027Z[GMT]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2024-10-11T13:43:34.865069393Z[GMT]")
 
 public class ProductProduct {
   @SerializedName("altId")
@@ -135,10 +135,10 @@ public class ProductProduct {
   }
 
    /**
-   * A url of the product image
+   * A url of the product image, if supplied Flockr will respond with an image URL that can be used to display the social proof message as an image
    * @return image
   **/
-  @Schema(example = "https://www.toppstiles.co.uk/static/media/catalog/product/c/a/634119_metro-white-tile_7.jpg", description = "A url of the product image")
+  @Schema(example = "https://www.toppstiles.co.uk/static/media/catalog/product/c/a/634119_metro-white-tile_7.jpg", description = "A url of the product image, if supplied Flockr will respond with an image URL that can be used to display the social proof message as an image")
   public String getImage() {
     return image;
   }

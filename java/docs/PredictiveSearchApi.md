@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 <a name="predictiveSearch"></a>
 # **predictiveSearch**
-> Flockr predictiveSearch(body, apiKey, flockrDemo, flockrFakeData)
+> Flockr predictiveSearch(body, apiKey, flockrDemo, flockrFakeData, transparent)
 
 Fetches a set of proofs for the provided product IDs. Flockr will decide which products to return proofs for
 
@@ -26,8 +26,9 @@ List body = new List(); // List | An array of product IDs or altIds
 String apiKey = "apiKey_example"; // String | your api key
 String flockrDemo = "flockrDemo_example"; // String | append this parameter with the value \"true\" to return demo data for testing
 String flockrFakeData = "flockrFakeData_example"; // String | append this value to return demo data of a specific proof type
+Boolean transparent = true; // Boolean | if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
 try {
-    Flockr result = apiInstance.predictiveSearch(body, apiKey, flockrDemo, flockrFakeData);
+    Flockr result = apiInstance.predictiveSearch(body, apiKey, flockrDemo, flockrFakeData, transparent);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling PredictiveSearchApi#predictiveSearch");
@@ -43,6 +44,7 @@ Name | Type | Description  | Notes
  **apiKey** | **String**| your api key |
  **flockrDemo** | **String**| append this parameter with the value \&quot;true\&quot; to return demo data for testing | [optional]
  **flockrFakeData** | **String**| append this value to return demo data of a specific proof type | [optional] [enum: TS, QPH, LPMS, LPSP, SLVP, ATB, SLVB, CAP, SLVA, PRV, SZ]
+ **transparent** | **Boolean**| if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied | [optional]
 
 ### Return type
 

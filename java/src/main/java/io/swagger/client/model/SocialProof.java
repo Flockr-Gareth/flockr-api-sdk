@@ -29,11 +29,14 @@ import java.util.List;
  * SocialProof
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2024-10-10T17:35:19.331632027Z[GMT]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2024-10-11T13:43:34.865069393Z[GMT]")
 
 public class SocialProof {
   @SerializedName("messages")
   private List<Message> messages = null;
+
+  @SerializedName("image")
+  private String image = null;
 
   @SerializedName("product")
   private SocialProofProduct product = null;
@@ -62,6 +65,24 @@ public class SocialProof {
 
   public void setMessages(List<Message> messages) {
     this.messages = messages;
+  }
+
+  public SocialProof image(String image) {
+    this.image = image;
+    return this;
+  }
+
+   /**
+   * Get image
+   * @return image
+  **/
+  @Schema(example = "https://flockr-cdn.com/api/v2/key/{apiKey}/image?host=app&image=https%3A%2F%2Fwww.toppstiles.co.uk%2Fstatic%2Fmedia%2Fcatalog%2Fproduct%2Fc%2Fa%2F634119_metro-white-tile_7.jpg&productId=1725&visitorId=51102fbc-525c-41a2-b4e1-1606e19f3f88&sessionId=5e537d75-72ff-47df-a581-d5f0d0316062&transparent=false", description = "")
+  public String getImage() {
+    return image;
+  }
+
+  public void setImage(String image) {
+    this.image = image;
   }
 
   public SocialProof product(SocialProofProduct product) {
@@ -93,12 +114,13 @@ public class SocialProof {
     }
     SocialProof socialProof = (SocialProof) o;
     return Objects.equals(this.messages, socialProof.messages) &&
+        Objects.equals(this.image, socialProof.image) &&
         Objects.equals(this.product, socialProof.product);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(messages, product);
+    return Objects.hash(messages, image, product);
   }
 
 
@@ -108,6 +130,7 @@ public class SocialProof {
     sb.append("class SocialProof {\n");
     
     sb.append("    messages: ").append(toIndentedString(messages)).append("\n");
+    sb.append("    image: ").append(toIndentedString(image)).append("\n");
     sb.append("    product: ").append(toIndentedString(product)).append("\n");
     sb.append("}");
     return sb.toString();

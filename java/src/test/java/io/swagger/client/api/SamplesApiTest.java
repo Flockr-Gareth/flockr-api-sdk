@@ -46,7 +46,8 @@ public class SamplesApiTest {
         String apiKey = null;
         String flockrDemo = null;
         String flockrFakeData = null;
-        Flockr response = api.samplesList(body, apiKey, flockrDemo, flockrFakeData);
+        Boolean transparent = null;
+        Flockr response = api.samplesList(body, apiKey, flockrDemo, flockrFakeData, transparent);
 
         // TODO: test validations
     }
