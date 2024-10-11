@@ -2,7 +2,7 @@
 
 Flockr Social Proof API
 - API version: 1.0.0
-  - Build date: 2024-10-10T17:35:19.331632027Z[GMT]
+  - Build date: 2024-10-11T13:43:34.865069393Z[GMT]
 
 API for sending product user actions and retrieving social proof
 
@@ -88,8 +88,9 @@ public class CartApiExample {
         String apiKey = "apiKey_example"; // String | your api key
         String flockrDemo = "flockrDemo_example"; // String | append this parameter with the value \"true\" to return demo data for testing
         String flockrFakeData = "flockrFakeData_example"; // String | append this value to return demo data of a specific proof type
+        Boolean transparent = true; // Boolean | if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
         try {
-            Flockr result = apiInstance.cartDrawer(body, apiKey, flockrDemo, flockrFakeData);
+            Flockr result = apiInstance.cartDrawer(body, apiKey, flockrDemo, flockrFakeData, transparent);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling CartApi#cartDrawer");

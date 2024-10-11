@@ -46,7 +46,8 @@ public class CartApiTest {
         String apiKey = null;
         String flockrDemo = null;
         String flockrFakeData = null;
-        Flockr response = api.cartDrawer(body, apiKey, flockrDemo, flockrFakeData);
+        Boolean transparent = null;
+        Flockr response = api.cartDrawer(body, apiKey, flockrDemo, flockrFakeData, transparent);
 
         // TODO: test validations
     }

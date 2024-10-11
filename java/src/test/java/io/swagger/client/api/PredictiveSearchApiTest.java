@@ -45,7 +45,8 @@ public class PredictiveSearchApiTest {
         String apiKey = null;
         String flockrDemo = null;
         String flockrFakeData = null;
-        Flockr response = api.predictiveSearch(body, apiKey, flockrDemo, flockrFakeData);
+        Boolean transparent = null;
+        Flockr response = api.predictiveSearch(body, apiKey, flockrDemo, flockrFakeData, transparent);
 
         // TODO: test validations
     }

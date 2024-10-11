@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 <a name="cartDrawer"></a>
 # **cartDrawer**
-> Flockr cartDrawer(body, apiKey, flockrDemo, flockrFakeData)
+> Flockr cartDrawer(body, apiKey, flockrDemo, flockrFakeData, transparent)
 
 Fetches a set of proofs for the provided product IDs. Flockr will decide which products to return proofs for
 
@@ -27,8 +27,9 @@ ListOnly body = new ListOnly(); // ListOnly | An array of product IDs or altIds
 String apiKey = "apiKey_example"; // String | your api key
 String flockrDemo = "flockrDemo_example"; // String | append this parameter with the value \"true\" to return demo data for testing
 String flockrFakeData = "flockrFakeData_example"; // String | append this value to return demo data of a specific proof type
+Boolean transparent = true; // Boolean | if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
 try {
-    Flockr result = apiInstance.cartDrawer(body, apiKey, flockrDemo, flockrFakeData);
+    Flockr result = apiInstance.cartDrawer(body, apiKey, flockrDemo, flockrFakeData, transparent);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling ListApi#cartDrawer");
@@ -44,6 +45,7 @@ Name | Type | Description  | Notes
  **apiKey** | **String**| your api key |
  **flockrDemo** | **String**| append this parameter with the value \&quot;true\&quot; to return demo data for testing | [optional]
  **flockrFakeData** | **String**| append this value to return demo data of a specific proof type | [optional] [enum: TS, QPH, LPMS, LPSP, SLVP, ATB, SLVB, CAP, SLVA, PRV, SZ]
+ **transparent** | **Boolean**| if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied | [optional]
 
 ### Return type
 
@@ -60,7 +62,7 @@ No authorization required
 
 <a name="samplesList"></a>
 # **samplesList**
-> Flockr samplesList(body, apiKey, flockrDemo, flockrFakeData)
+> Flockr samplesList(body, apiKey, flockrDemo, flockrFakeData, transparent)
 
 Fetches a set of proofs for the provided product IDs based on sample interactions, e.g, number of samples for a given product ordered. Flockr will decide which products to return proofs for
 
@@ -78,8 +80,9 @@ ListOnly body = new ListOnly(); // ListOnly | An array of product IDs or altIds
 String apiKey = "apiKey_example"; // String | your api key
 String flockrDemo = "flockrDemo_example"; // String | append this parameter with the value \"true\" to return demo data for testing
 String flockrFakeData = "flockrFakeData_example"; // String | append this value to return demo data of a specific proof type
+Boolean transparent = true; // Boolean | if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
 try {
-    Flockr result = apiInstance.samplesList(body, apiKey, flockrDemo, flockrFakeData);
+    Flockr result = apiInstance.samplesList(body, apiKey, flockrDemo, flockrFakeData, transparent);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling ListApi#samplesList");
@@ -95,6 +98,7 @@ Name | Type | Description  | Notes
  **apiKey** | **String**| your api key |
  **flockrDemo** | **String**| append this parameter with the value \&quot;true\&quot; to return demo data for testing | [optional]
  **flockrFakeData** | **String**| append this value to return demo data of a specific proof type | [optional] [enum: TS, QPH, LPMS, LPSP, SLVP, ATB, SLVB, CAP, SLVA, PRV, SZ]
+ **transparent** | **Boolean**| if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied | [optional]
 
 ### Return type
 

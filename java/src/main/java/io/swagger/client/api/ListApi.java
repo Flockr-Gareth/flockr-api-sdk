@@ -65,12 +65,13 @@ public class ListApi {
      * @param apiKey your api key (required)
      * @param flockrDemo append this parameter with the value \&quot;true\&quot; to return demo data for testing (optional)
      * @param flockrFakeData append this value to return demo data of a specific proof type (optional)
+     * @param transparent if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied (optional)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call cartDrawerCall(ListOnly body, String apiKey, String flockrDemo, String flockrFakeData, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call cartDrawerCall(ListOnly body, String apiKey, String flockrDemo, String flockrFakeData, Boolean transparent, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = body;
         
         // create path and map variables
@@ -83,6 +84,8 @@ public class ListApi {
         localVarQueryParams.addAll(apiClient.parameterToPair("flockrDemo", flockrDemo));
         if (flockrFakeData != null)
         localVarQueryParams.addAll(apiClient.parameterToPair("flockrFakeData", flockrFakeData));
+        if (transparent != null)
+        localVarQueryParams.addAll(apiClient.parameterToPair("transparent", transparent));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -120,7 +123,7 @@ public class ListApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call cartDrawerValidateBeforeCall(ListOnly body, String apiKey, String flockrDemo, String flockrFakeData, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call cartDrawerValidateBeforeCall(ListOnly body, String apiKey, String flockrDemo, String flockrFakeData, Boolean transparent, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         // verify the required parameter 'body' is set
         if (body == null) {
             throw new ApiException("Missing the required parameter 'body' when calling cartDrawer(Async)");
@@ -130,7 +133,7 @@ public class ListApi {
             throw new ApiException("Missing the required parameter 'apiKey' when calling cartDrawer(Async)");
         }
         
-        com.squareup.okhttp.Call call = cartDrawerCall(body, apiKey, flockrDemo, flockrFakeData, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = cartDrawerCall(body, apiKey, flockrDemo, flockrFakeData, transparent, progressListener, progressRequestListener);
         return call;
 
         
@@ -146,11 +149,12 @@ public class ListApi {
      * @param apiKey your api key (required)
      * @param flockrDemo append this parameter with the value \&quot;true\&quot; to return demo data for testing (optional)
      * @param flockrFakeData append this value to return demo data of a specific proof type (optional)
+     * @param transparent if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied (optional)
      * @return Flockr
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public Flockr cartDrawer(ListOnly body, String apiKey, String flockrDemo, String flockrFakeData) throws ApiException {
-        ApiResponse<Flockr> resp = cartDrawerWithHttpInfo(body, apiKey, flockrDemo, flockrFakeData);
+    public Flockr cartDrawer(ListOnly body, String apiKey, String flockrDemo, String flockrFakeData, Boolean transparent) throws ApiException {
+        ApiResponse<Flockr> resp = cartDrawerWithHttpInfo(body, apiKey, flockrDemo, flockrFakeData, transparent);
         return resp.getData();
     }
 
@@ -161,11 +165,12 @@ public class ListApi {
      * @param apiKey your api key (required)
      * @param flockrDemo append this parameter with the value \&quot;true\&quot; to return demo data for testing (optional)
      * @param flockrFakeData append this value to return demo data of a specific proof type (optional)
+     * @param transparent if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied (optional)
      * @return ApiResponse&lt;Flockr&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<Flockr> cartDrawerWithHttpInfo(ListOnly body, String apiKey, String flockrDemo, String flockrFakeData) throws ApiException {
-        com.squareup.okhttp.Call call = cartDrawerValidateBeforeCall(body, apiKey, flockrDemo, flockrFakeData, null, null);
+    public ApiResponse<Flockr> cartDrawerWithHttpInfo(ListOnly body, String apiKey, String flockrDemo, String flockrFakeData, Boolean transparent) throws ApiException {
+        com.squareup.okhttp.Call call = cartDrawerValidateBeforeCall(body, apiKey, flockrDemo, flockrFakeData, transparent, null, null);
         Type localVarReturnType = new TypeToken<Flockr>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -177,11 +182,12 @@ public class ListApi {
      * @param apiKey your api key (required)
      * @param flockrDemo append this parameter with the value \&quot;true\&quot; to return demo data for testing (optional)
      * @param flockrFakeData append this value to return demo data of a specific proof type (optional)
+     * @param transparent if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied (optional)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call cartDrawerAsync(ListOnly body, String apiKey, String flockrDemo, String flockrFakeData, final ApiCallback<Flockr> callback) throws ApiException {
+    public com.squareup.okhttp.Call cartDrawerAsync(ListOnly body, String apiKey, String flockrDemo, String flockrFakeData, Boolean transparent, final ApiCallback<Flockr> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -202,7 +208,7 @@ public class ListApi {
             };
         }
 
-        com.squareup.okhttp.Call call = cartDrawerValidateBeforeCall(body, apiKey, flockrDemo, flockrFakeData, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = cartDrawerValidateBeforeCall(body, apiKey, flockrDemo, flockrFakeData, transparent, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<Flockr>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
@@ -213,12 +219,13 @@ public class ListApi {
      * @param apiKey your api key (required)
      * @param flockrDemo append this parameter with the value \&quot;true\&quot; to return demo data for testing (optional)
      * @param flockrFakeData append this value to return demo data of a specific proof type (optional)
+     * @param transparent if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied (optional)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call samplesListCall(ListOnly body, String apiKey, String flockrDemo, String flockrFakeData, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call samplesListCall(ListOnly body, String apiKey, String flockrDemo, String flockrFakeData, Boolean transparent, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = body;
         
         // create path and map variables
@@ -231,6 +238,8 @@ public class ListApi {
         localVarQueryParams.addAll(apiClient.parameterToPair("flockrDemo", flockrDemo));
         if (flockrFakeData != null)
         localVarQueryParams.addAll(apiClient.parameterToPair("flockrFakeData", flockrFakeData));
+        if (transparent != null)
+        localVarQueryParams.addAll(apiClient.parameterToPair("transparent", transparent));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -268,7 +277,7 @@ public class ListApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call samplesListValidateBeforeCall(ListOnly body, String apiKey, String flockrDemo, String flockrFakeData, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call samplesListValidateBeforeCall(ListOnly body, String apiKey, String flockrDemo, String flockrFakeData, Boolean transparent, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         // verify the required parameter 'body' is set
         if (body == null) {
             throw new ApiException("Missing the required parameter 'body' when calling samplesList(Async)");
@@ -278,7 +287,7 @@ public class ListApi {
             throw new ApiException("Missing the required parameter 'apiKey' when calling samplesList(Async)");
         }
         
-        com.squareup.okhttp.Call call = samplesListCall(body, apiKey, flockrDemo, flockrFakeData, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = samplesListCall(body, apiKey, flockrDemo, flockrFakeData, transparent, progressListener, progressRequestListener);
         return call;
 
         
@@ -294,11 +303,12 @@ public class ListApi {
      * @param apiKey your api key (required)
      * @param flockrDemo append this parameter with the value \&quot;true\&quot; to return demo data for testing (optional)
      * @param flockrFakeData append this value to return demo data of a specific proof type (optional)
+     * @param transparent if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied (optional)
      * @return Flockr
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public Flockr samplesList(ListOnly body, String apiKey, String flockrDemo, String flockrFakeData) throws ApiException {
-        ApiResponse<Flockr> resp = samplesListWithHttpInfo(body, apiKey, flockrDemo, flockrFakeData);
+    public Flockr samplesList(ListOnly body, String apiKey, String flockrDemo, String flockrFakeData, Boolean transparent) throws ApiException {
+        ApiResponse<Flockr> resp = samplesListWithHttpInfo(body, apiKey, flockrDemo, flockrFakeData, transparent);
         return resp.getData();
     }
 
@@ -309,11 +319,12 @@ public class ListApi {
      * @param apiKey your api key (required)
      * @param flockrDemo append this parameter with the value \&quot;true\&quot; to return demo data for testing (optional)
      * @param flockrFakeData append this value to return demo data of a specific proof type (optional)
+     * @param transparent if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied (optional)
      * @return ApiResponse&lt;Flockr&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<Flockr> samplesListWithHttpInfo(ListOnly body, String apiKey, String flockrDemo, String flockrFakeData) throws ApiException {
-        com.squareup.okhttp.Call call = samplesListValidateBeforeCall(body, apiKey, flockrDemo, flockrFakeData, null, null);
+    public ApiResponse<Flockr> samplesListWithHttpInfo(ListOnly body, String apiKey, String flockrDemo, String flockrFakeData, Boolean transparent) throws ApiException {
+        com.squareup.okhttp.Call call = samplesListValidateBeforeCall(body, apiKey, flockrDemo, flockrFakeData, transparent, null, null);
         Type localVarReturnType = new TypeToken<Flockr>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -325,11 +336,12 @@ public class ListApi {
      * @param apiKey your api key (required)
      * @param flockrDemo append this parameter with the value \&quot;true\&quot; to return demo data for testing (optional)
      * @param flockrFakeData append this value to return demo data of a specific proof type (optional)
+     * @param transparent if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied (optional)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call samplesListAsync(ListOnly body, String apiKey, String flockrDemo, String flockrFakeData, final ApiCallback<Flockr> callback) throws ApiException {
+    public com.squareup.okhttp.Call samplesListAsync(ListOnly body, String apiKey, String flockrDemo, String flockrFakeData, Boolean transparent, final ApiCallback<Flockr> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -350,7 +362,7 @@ public class ListApi {
             };
         }
 
-        com.squareup.okhttp.Call call = samplesListValidateBeforeCall(body, apiKey, flockrDemo, flockrFakeData, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = samplesListValidateBeforeCall(body, apiKey, flockrDemo, flockrFakeData, transparent, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<Flockr>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;

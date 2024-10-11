@@ -27,12 +27,14 @@ import io.swagger.client.model.RequestVisitor;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 /**
  * ListOnly
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2024-10-10T17:35:19.331632027Z[GMT]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2024-10-11T13:43:34.865069393Z[GMT]")
 
 public class ListOnly extends Request {
   @SerializedName("category")
@@ -40,6 +42,9 @@ public class ListOnly extends Request {
 
   @SerializedName("products")
   private List<String> products = new ArrayList<String>();
+
+  @SerializedName("images")
+  private Map<String, String> images = null;
 
   public ListOnly category(String category) {
     this.category = category;
@@ -82,6 +87,32 @@ public class ListOnly extends Request {
     this.products = products;
   }
 
+  public ListOnly images(Map<String, String> images) {
+    this.images = images;
+    return this;
+  }
+
+  public ListOnly putImagesItem(String key, String imagesItem) {
+    if (this.images == null) {
+      this.images = new HashMap<String, String>();
+    }
+    this.images.put(key, imagesItem);
+    return this;
+  }
+
+   /**
+   * Anoptional map of productIds to image URL, if supplied Flockr will return an image URL for the social proof alon with the social proof values
+   * @return images
+  **/
+  @Schema(example = "{\"1725\":\"https://www.toppstiles.co.uk/static/media/catalog/product/c/a/634119_metro-white-tile_7.jpg\"}", description = "Anoptional map of productIds to image URL, if supplied Flockr will return an image URL for the social proof alon with the social proof values")
+  public Map<String, String> getImages() {
+    return images;
+  }
+
+  public void setImages(Map<String, String> images) {
+    this.images = images;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -94,12 +125,13 @@ public class ListOnly extends Request {
     ListOnly listOnly = (ListOnly) o;
     return Objects.equals(this.category, listOnly.category) &&
         Objects.equals(this.products, listOnly.products) &&
+        Objects.equals(this.images, listOnly.images) &&
         super.equals(o);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(category, products, super.hashCode());
+    return Objects.hash(category, products, images, super.hashCode());
   }
 
 
@@ -110,6 +142,7 @@ public class ListOnly extends Request {
     sb.append("    ").append(toIndentedString(super.toString())).append("\n");
     sb.append("    category: ").append(toIndentedString(category)).append("\n");
     sb.append("    products: ").append(toIndentedString(products)).append("\n");
+    sb.append("    images: ").append(toIndentedString(images)).append("\n");
     sb.append("}");
     return sb.toString();
   }
