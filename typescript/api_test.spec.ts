@@ -28,7 +28,8 @@ describe("CartApi", () => {
     const apiKey: string = "apiKey_example"
     const flockrDemo: string = "flockrDemo_example"
     const flockrFakeData: string = "flockrFakeData_example"
-    return expect(instance.cartDrawer(body, apiKey, flockrDemo, flockrFakeData, {})).resolves.toBe(null)
+    const transparent: boolean = true
+    return expect(instance.cartDrawer(body, apiKey, flockrDemo, flockrFakeData, transparent, {})).resolves.toBe(null)
   })
 })
 
@@ -96,7 +97,8 @@ describe("ListApi", () => {
     const apiKey: string = "apiKey_example"
     const flockrDemo: string = "flockrDemo_example"
     const flockrFakeData: string = "flockrFakeData_example"
-    return expect(instance.cartDrawer(body, apiKey, flockrDemo, flockrFakeData, {})).resolves.toBe(null)
+    const transparent: boolean = true
+    return expect(instance.cartDrawer(body, apiKey, flockrDemo, flockrFakeData, transparent, {})).resolves.toBe(null)
   })
   test("samplesList", () => {
     const body: api.ListOnly = {
@@ -105,7 +107,8 @@ describe("ListApi", () => {
     const apiKey: string = "apiKey_example"
     const flockrDemo: string = "flockrDemo_example"
     const flockrFakeData: string = "flockrFakeData_example"
-    return expect(instance.samplesList(body, apiKey, flockrDemo, flockrFakeData, {})).resolves.toBe(null)
+    const transparent: boolean = true
+    return expect(instance.samplesList(body, apiKey, flockrDemo, flockrFakeData, transparent, {})).resolves.toBe(null)
   })
 })
 
@@ -139,7 +142,8 @@ describe("PredictiveSearchApi", () => {
     const apiKey: string = "apiKey_example"
     const flockrDemo: string = "flockrDemo_example"
     const flockrFakeData: string = "flockrFakeData_example"
-    return expect(instance.predictiveSearch(body, apiKey, flockrDemo, flockrFakeData, {})).resolves.toBe(null)
+    const transparent: boolean = true
+    return expect(instance.predictiveSearch(body, apiKey, flockrDemo, flockrFakeData, transparent, {})).resolves.toBe(null)
   })
 })
 
@@ -156,7 +160,8 @@ describe("ProductDetailsApi", () => {
     const apiKey: string = "apiKey_example"
     const flockrDemo: string = "flockrDemo_example"
     const flockrFakeData: string = "flockrFakeData_example"
-    return expect(instance.productVisit(body, apiKey, flockrDemo, flockrFakeData, {})).resolves.toBe(null)
+    const transparent: boolean = true
+    return expect(instance.productVisit(body, apiKey, flockrDemo, flockrFakeData, transparent, {})).resolves.toBe(null)
   })
 })
 
@@ -174,6 +179,9 @@ describe("ProductListApi", () => {
       "sessionId" : "5e537d75-72ff-47df-a581-d5f0d0316062"
     },
     "products" : [ "1725", "6947", "1750", "9235", "1838", "1722", "9422", "9292", "10432", "9216", "10377", "9150", "10378", "7888", "10430", "1782", "1690", "8900", "1709", "6433", "10025", "10095", "4941", "9904" ],
+    "images" : {
+      "1725" : "https://www.toppstiles.co.uk/static/media/catalog/product/c/a/634119_metro-white-tile_7.jpg"
+    },
     "recommendations" : [ "7456", "7123" ],
     "category" : "Bathroom Tiles",
     "device" : {
@@ -190,7 +198,8 @@ describe("ProductListApi", () => {
     const apiKey: string = "apiKey_example"
     const flockrDemo: string = "flockrDemo_example"
     const flockrFakeData: string = "flockrFakeData_example"
-    return expect(instance.categoryVisit(body, apiKey, flockrDemo, flockrFakeData, {})).resolves.toBe(null)
+    const transparent: boolean = true
+    return expect(instance.categoryVisit(body, apiKey, flockrDemo, flockrFakeData, transparent, {})).resolves.toBe(null)
   })
 })
 
@@ -224,7 +233,8 @@ describe("SamplesApi", () => {
     const apiKey: string = "apiKey_example"
     const flockrDemo: string = "flockrDemo_example"
     const flockrFakeData: string = "flockrFakeData_example"
-    return expect(instance.samplesList(body, apiKey, flockrDemo, flockrFakeData, {})).resolves.toBe(null)
+    const transparent: boolean = true
+    return expect(instance.samplesList(body, apiKey, flockrDemo, flockrFakeData, transparent, {})).resolves.toBe(null)
   })
 })
 
