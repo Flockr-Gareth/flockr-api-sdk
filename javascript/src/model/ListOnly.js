@@ -57,6 +57,8 @@ export default class ListOnly extends Request {
         obj.category = ApiClient.convertToType(data['category'], 'String');
       if (data.hasOwnProperty('products'))
         obj.products = ApiClient.convertToType(data['products'], ['String']);
+      if (data.hasOwnProperty('images'))
+        obj.images = ApiClient.convertToType(data['images'], {'String': 'String'});
     }
     return obj;
   }
@@ -73,4 +75,10 @@ ListOnly.prototype.category = undefined;
  * @member {Array.<String>} products
  */
 ListOnly.prototype.products = undefined;
+
+/**
+ * Anoptional map of productIds to image URL, if supplied Flockr will return an image URL for the social proof alon with the social proof values
+ * @member {Object.<String, String>} images
+ */
+ListOnly.prototype.images = undefined;
 

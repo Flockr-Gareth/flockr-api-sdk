@@ -43,6 +43,8 @@ export default class SocialProof {
       obj = obj || new SocialProof();
       if (data.hasOwnProperty('messages'))
         obj.messages = ApiClient.convertToType(data['messages'], [Message]);
+      if (data.hasOwnProperty('image'))
+        obj.image = ApiClient.convertToType(data['image'], 'String');
       if (data.hasOwnProperty('product'))
         obj.product = SocialProofProduct.constructFromObject(data['product']);
     }
@@ -54,6 +56,11 @@ export default class SocialProof {
  * @member {Array.<module:model/Message>} messages
  */
 SocialProof.prototype.messages = undefined;
+
+/**
+ * @member {String} image
+ */
+SocialProof.prototype.image = undefined;
 
 /**
  * @member {module:model/SocialProofProduct} product

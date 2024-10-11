@@ -52,6 +52,7 @@ export default class ListApi {
      * @param {Object} opts Optional parameters
      * @param {String} opts.flockrDemo append this parameter with the value \&quot;true\&quot; to return demo data for testing
      * @param {module:model/String} opts.flockrFakeData append this value to return demo data of a specific proof type
+     * @param {Boolean} opts.transparent if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
      * @param {module:api/ListApi~cartDrawerCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link <&vendorExtensions.x-jsdoc-type>}
      */
@@ -71,7 +72,7 @@ export default class ListApi {
         'apiKey': apiKey
       };
       let queryParams = {
-        'flockrDemo': opts['flockrDemo'],'flockrFakeData': opts['flockrFakeData']
+        'flockrDemo': opts['flockrDemo'],'flockrFakeData': opts['flockrFakeData'],'transparent': opts['transparent']
       };
       let headerParams = {
         
@@ -107,6 +108,7 @@ export default class ListApi {
      * @param {Object} opts Optional parameters
      * @param {String} opts.flockrDemo append this parameter with the value \&quot;true\&quot; to return demo data for testing
      * @param {module:model/String} opts.flockrFakeData append this value to return demo data of a specific proof type
+     * @param {Boolean} opts.transparent if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
      * @param {module:api/ListApi~samplesListCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link <&vendorExtensions.x-jsdoc-type>}
      */
@@ -126,7 +128,7 @@ export default class ListApi {
         'apiKey': apiKey
       };
       let queryParams = {
-        'flockrDemo': opts['flockrDemo'],'flockrFakeData': opts['flockrFakeData']
+        'flockrDemo': opts['flockrDemo'],'flockrFakeData': opts['flockrFakeData'],'transparent': opts['transparent']
       };
       let headerParams = {
         

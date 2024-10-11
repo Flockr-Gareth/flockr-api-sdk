@@ -59,6 +59,8 @@ export default class List extends Request {
         obj.products = ApiClient.convertToType(data['products'], ['String']);
       if (data.hasOwnProperty('recommendations'))
         obj.recommendations = ApiClient.convertToType(data['recommendations'], ['String']);
+      if (data.hasOwnProperty('images'))
+        obj.images = ApiClient.convertToType(data['images'], {'String': 'String'});
     }
     return obj;
   }
@@ -81,4 +83,10 @@ List.prototype.products = undefined;
  * @member {Array.<String>} recommendations
  */
 List.prototype.recommendations = undefined;
+
+/**
+ * Anoptional map of productIds to image URL, if supplied Flockr will return an image URL for the social proof alon with the social proof values
+ * @member {Object.<String, String>} images
+ */
+List.prototype.images = undefined;
 

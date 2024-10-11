@@ -24,7 +24,8 @@ let body = new FlockrSocialProofApi.ListOnly(); // ListOnly | An array of produc
 let apiKey = "apiKey_example"; // String | your api key
 let opts = { 
   'flockrDemo': "flockrDemo_example", // String | append this parameter with the value \"true\" to return demo data for testing
-  'flockrFakeData': "flockrFakeData_example" // String | append this value to return demo data of a specific proof type
+  'flockrFakeData': "flockrFakeData_example", // String | append this value to return demo data of a specific proof type
+  'transparent': true // Boolean | if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
 };
 apiInstance.cartDrawer(body, apiKey, opts, (error, data, response) => {
   if (error) {
@@ -43,6 +44,7 @@ Name | Type | Description  | Notes
  **apiKey** | **String**| your api key | 
  **flockrDemo** | **String**| append this parameter with the value \&quot;true\&quot; to return demo data for testing | [optional] 
  **flockrFakeData** | **String**| append this value to return demo data of a specific proof type | [optional] 
+ **transparent** | **Boolean**| if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied | [optional] 
 
 ### Return type
 
@@ -74,7 +76,8 @@ let body = new FlockrSocialProofApi.ListOnly(); // ListOnly | An array of produc
 let apiKey = "apiKey_example"; // String | your api key
 let opts = { 
   'flockrDemo': "flockrDemo_example", // String | append this parameter with the value \"true\" to return demo data for testing
-  'flockrFakeData': "flockrFakeData_example" // String | append this value to return demo data of a specific proof type
+  'flockrFakeData': "flockrFakeData_example", // String | append this value to return demo data of a specific proof type
+  'transparent': true // Boolean | if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied
 };
 apiInstance.samplesList(body, apiKey, opts, (error, data, response) => {
   if (error) {
@@ -93,6 +96,7 @@ Name | Type | Description  | Notes
  **apiKey** | **String**| your api key | 
  **flockrDemo** | **String**| append this parameter with the value \&quot;true\&quot; to return demo data for testing | [optional] 
  **flockrFakeData** | **String**| append this value to return demo data of a specific proof type | [optional] 
+ **transparent** | **Boolean**| if supplied as well as an image url, will define whether a transparent based image url is returned for the image with social proof applied | [optional] 
 
 ### Return type
 

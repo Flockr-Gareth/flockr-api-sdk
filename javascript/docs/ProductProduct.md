@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **id** | **String** | The unique ID for the product - must be a string | 
 **category** | **String** | The category of the product | [optional] 
 **displayPriceUnitPlural** | **String** | A plural name that the product is sold in, e.g. boxes | [optional] 
-**image** | **String** | A url of the product image | [optional] 
+**image** | **String** | A url of the product image, if supplied Flockr will respond with an image URL that can be used to display the social proof message as an image | [optional] 
 **name** | **String** | The name of the product | [optional] 
 **recommendations** | **[OneOfproductProductRecommendationsItems]** | Optional list of product IDs to fetch proof values for (can be requested on a dedicated call instead if required) | [optional] 
 **sku** | **String** | An optinal SKU for the product | [optional] 
